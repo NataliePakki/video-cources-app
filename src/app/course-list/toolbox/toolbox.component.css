@@ -1,0 +1,16 @@
+:host {
+    display: grid;
+    grid-template-columns: 85% 15%;
+    margin-left: 10px;
+}
+#search {
+    grid-column-start: 1;
+}
+#search input {
+    width: 60%;
+    margin-right: 10px;
+}
+
+#add {
+    grid-column-start: 2;
+}

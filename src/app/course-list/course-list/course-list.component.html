@@ -1,4 +1,8 @@
 
-<app-toolbox></app-toolbox>
-<app-course-list-item *ngFor="let item of courseListsItems" [courseListItem]="item" (delete)="onDelete($event)"></app-course-list-item>
-<button class="btn" (click)="loadMoreCourses()">LOAD MORE</button>
+<div class="container">
+    <app-toolbox></app-toolbox>
+    <div class="list-group">
+        <app-course-list-item *ngFor="let item of courseListsItems" [courseListItem]="item" (delete)="onDelete($event)"></app-course-list-item>
+    </div>
+    <button class="btn btn-primary btn-lg btn-block" (click)="loadMoreCourses()">LOAD MORE</button>
+</div>

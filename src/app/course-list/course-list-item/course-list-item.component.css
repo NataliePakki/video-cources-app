@@ -1,5 +1,39 @@
+.course {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 30% 10%;
+    grid-template-rows: 20% 50% 10%;
+}
 
-.course button {
-    width: 75px;
-    margin-right: 5px;
+.course .title {
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.course .description {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+.course .author {
+    grid-row-start: 3;
+    grid-column-start: 1;
+}
+.course .duraction {
+    grid-row-start: 3;
+    grid-column-start: 2;
+}
+.course .date {
+    grid-row-start: 3;
+    grid-column-start: 3;
+}
+
+.course .edit {
+    grid-column-start: 5;
+    grid-row-start: 1;
+    margin-bottom: 5px;
+}
+.course .delete {
+    grid-column-start: 5;
+    grid-row-start: 2;
 }

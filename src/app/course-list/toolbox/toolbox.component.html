@@ -1,11 +1,7 @@
-<div class="row">
-  <div class="col-md-8">
-    <form #findForm="ngForm" class="form-inline">
-      <input [(ngModel)]="findValue" name="findValue" placeholder="Name, fragment or date">
-       <button type="submit" class="btn btn-primary" (click)="findCourse()">Find</button>
-    </form>
-    </div>
-  <div class="col-md-4">
-    <button type="button" class="btn btn-large btn-block btn-default">Add Course</button>
-  </div>
-</div>
+ <form id="search" findForm="ngForm" class="form-inline my-4 my-lg-0">
+  <input [(ngModel)]="findValue" name="findValue" class="form-control" type="text" placeholder="Name, fragment or date">
+  <button id="find" class="btn btn-secondary my-2 my-sm-0" type="submit" (click)="findCourse()">Find</button>
+</form>
+<button id="add" type="button" class="btn btn-primary my-2 my-sm-0">Add Course</button>
+
+
