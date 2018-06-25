@@ -8,18 +8,26 @@ import { CourseItem } from '../models/course-item';
 })
 export class CourseListComponent implements OnInit {
   courseListsItems: CourseItem [];
- // tslint:disable-next-line:max-line-length
- fakeDescription = 'The quick brown fox jumps over the lazy dogT he quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog';
+  // tslint:disable-next-line:max-line-length
+  fakeDescription = 'The quick brown fox jumps over the lazy dogT he quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog';
 
   constructor() {
-    // tslint:disable-next-line:max-line-length
-    this.courseListsItems = [
-      new CourseItem(1, 'Video Cource 1', this.fakeDescription, 28, '05.29.2017'),
-      new CourseItem(2, 'Video Cource 2', this.fakeDescription, 30, '05.29.2016')
-    ];
-   }
-
-  ngOnInit() {
+    this.courseListsItems = [];
   }
 
+  onDelete(id: number) {
+    console.log('Delete course:' + id);
+  }
+
+  loadMoreCourses() {
+    console.log('Load more courses');
+  }
+
+  ngOnInit() {
+    this.courseListsItems = [
+      new CourseItem(1, 'Video Cource 1', this.fakeDescription, 28, '05.29.2017'),
+      new CourseItem(2, 'Video Cource 2', this.fakeDescription, 30, '05.29.2016'),
+      new CourseItem(3, 'Video Cource 3', this.fakeDescription, 450, '07.29.2016')
+    ];
+  }
 }
