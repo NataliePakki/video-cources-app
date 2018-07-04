@@ -8,7 +8,6 @@ import { CourseItem } from '../models/course-item';
 })
 export class CourseListComponent implements OnInit {
   courseListsItems: CourseItem [];
-  // tslint:disable-next-line:max-line-length
   fakeDescription = 'The quick brown fox jumps over the lazy dogT he quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog The quick brown fox jumps over the lazy dog';
 
   constructor() {
