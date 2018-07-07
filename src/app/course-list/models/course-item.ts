@@ -5,11 +5,11 @@ export class CourseItem implements CourseItemInterface {
     id: number;
     title: string;
     author: string;
-    creationDate: string;
+    creationDate: Date;
     duraction: Number;
     description: string;
 
-    constructor(id: number, title: string, author: string, description: string, duraction?: Number, creationDate?: string) {
+    constructor(id: number, title: string, author: string, description: string, duraction?: Number, creationDate?: Date) {
         this.id = id;
         this.title = title;
         this.author = author;

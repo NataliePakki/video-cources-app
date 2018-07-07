@@ -6,7 +6,7 @@
       <p class="mb-1 description">{{ courseListItem.description }}</p>
       <small class="author">Author: {{ courseListItem.author }}</small>
       <small class="duraction">Duraction: {{ courseListItem.duraction }} min</small>
-      <small class="date">Date: {{ courseListItem.creationDate }}</small>
+      <small class="date">Date: {{ courseListItem.creationDate | date: "MM.dd.yyyy"}}</small>
       <button type="button" class="btn btn-primary btn-sm edit">Edit</button>
       <button type="button" class="btn btn-primary btn-sm delete" (click)="deleteCourse()">Delete</button>
   </a>

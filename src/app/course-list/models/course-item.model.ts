@@ -3,7 +3,7 @@ export interface CourseItemInterface {
     id: number;
     title: string;
     author: string;
-    creationDate: string; // TODO: to Date
+    creationDate: Date;
     duraction: Number;
     description: string;
 }

@@ -5,8 +5,8 @@ import { Component, DebugElement } from '@angular/core';
 import { CourseItem } from '../models/course-item';
 import { By } from '@angular/platform-browser';
 
-const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, '10.10.2018');
-const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, '10.10.2018');
+const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
+const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
 @Component ({
   template: `
     <app-course-list-item *ngFor="let item of courseListsItems"

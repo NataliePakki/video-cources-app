@@ -24,9 +24,9 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     this.courseListsItems = [
-      new CourseItem(1, 'Video Cource 1', 'Natalie Pakki', this.fakeDescription, 28, '05.29.2017'),
-      new CourseItem(2, 'Video Cource 2', 'Natalie Pakki', this.fakeDescription, 30, '05.29.2016'),
-      new CourseItem(3, 'Video Cource 3', 'Natalie Pakki', this.fakeDescription, 450, '07.29.2016')
+      new CourseItem(1, 'Video Cource 1', 'Natalie Pakki', this.fakeDescription, 28, new Date(2017, 5, 29)),
+      new CourseItem(2, 'Video Cource 2', 'Natalie Pakki', this.fakeDescription, 30, new Date(2018, 12, 10)),
+      new CourseItem(3, 'Video Cource 3', 'Natalie Pakki', this.fakeDescription, 450, new Date(2016, 10, 10))
     ];
   }
 }
