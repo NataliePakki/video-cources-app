@@ -9,11 +9,14 @@ import { CourseItem } from '../models/course-item';
 export class CourseListItemComponent implements OnInit {
   @Input() courseListItem: CourseItem;
   @Output() delete = new EventEmitter<number>();
+  starImagePath: string;
 
   deleteCourse() {
     this.delete.emit(this.courseListItem.id);
   }
-  constructor() { }
+  constructor() {
+    this.starImagePath = '../../../assets/images/start_icon.svg';
+   }
 
   ngOnInit() {
   }

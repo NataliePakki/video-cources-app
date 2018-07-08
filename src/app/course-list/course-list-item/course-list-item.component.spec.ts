@@ -1,9 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseListItemComponent } from './course-list-item.component';
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { CourseItem } from '../models/course-item';
 import { By } from '@angular/platform-browser';
+import { OrderByPipe } from '../../pipes/order-by.pipe';
+import { FindPipe } from '../../pipes/find.pipe';
+import { HighlightDirective } from '../../directives/highlight.directive';
+import { FormatDuractionPipe } from '../../pipes/format-duraction.pipe';
 
 const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
 const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
@@ -31,7 +35,8 @@ describe('CourseListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseListItemComponent, TestHostComponent ]
+      providers: [ FindPipe, OrderByPipe, FormatDuractionPipe ],
+      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDuractionPipe, CourseListItemComponent, TestHostComponent ]
     })
     .compileComponents();
   }));
@@ -49,11 +54,11 @@ describe('CourseListItemComponent', () => {
     const firstCourseElement = courseElements[0];
     const deleteButton = firstCourseElement.query(By.css('.delete'));
     expect(deleteButton).toBeTruthy();
-    expect(firstCourseElement.query(By.css('.title')).nativeElement.textContent).toBe(firstCourseItem.title);
+    expect(firstCourseElement.query(By.css('.title')).nativeElement.textContent).toBe(firstCourseItem.title.toUpperCase());
     expect(firstCourseElement.query(By.css('.description')).nativeElement.textContent).toBe(firstCourseItem.description);
     expect(firstCourseElement.query(By.css('.author')).nativeElement.textContent).toBe('Author: ' + firstCourseItem.author);
-    expect(firstCourseElement.query(By.css('.duraction')).nativeElement.textContent).toBe('Duraction: ' + firstCourseItem.duraction + ' min');
-    expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + firstCourseItem.creationDate);
+    expect(firstCourseElement.query(By.css('.duraction')).nativeElement.textContent).toBe('Duraction: ' + firstCourseItem.duraction + 'min.');
+    expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + (firstCourseItem.creationDate.getMonth() + 1) + '.' + firstCourseItem.creationDate.getDate() + '.' + firstCourseItem.creationDate.getFullYear());
   });
 
   it('should delete course', () => {

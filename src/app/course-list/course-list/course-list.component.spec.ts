@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { CourseItem } from '../models/course-item';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from '@angular/core';
+import { OrderByPipe } from '../../pipes/order-by.pipe';
+import { FindPipe } from '../../pipes/find.pipe';
+import { HighlightDirective } from '../../directives/highlight.directive';
 
 @Component({
   selector: 'app-course-list-item',
@@ -23,7 +26,11 @@ describe('CourseListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
+      providers: [ FindPipe, OrderByPipe ],
       declarations: [
+        HighlightDirective,
+        FindPipe,
+        OrderByPipe,
         MockCourseListItemComponent,
         CourseListComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -6,4 +6,5 @@ export interface CourseItemInterface {
     creationDate: Date;
     duraction: Number;
     description: string;
+    topRated: boolean;
 }

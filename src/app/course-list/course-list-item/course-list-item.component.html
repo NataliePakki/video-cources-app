@@ -1,11 +1,12 @@
 
-  <a href="#" class="course list-group-item list-group-item-action flex-column align-items-start">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1 title">{{ courseListItem.title }}</h5>
+  <a [appHighlight]="courseListItem" [ngClass]="{rated: courseListItem.topRated}" href="#" class="course list-group-item list-group-item-action flex-column align-items-start">
+      <div class="title">
+        <h5 class="name">{{ courseListItem.title | uppercase}}</h5>
+        <img class="star"*ngIf="courseListItem.topRated" [src]="starImagePath" alt="rated course">
       </div>
       <p class="mb-1 description">{{ courseListItem.description }}</p>
       <small class="author">Author: {{ courseListItem.author }}</small>
-      <small class="duraction">Duraction: {{ courseListItem.duraction }} min</small>
+      <small class="duraction">Duraction: {{ courseListItem.duraction | formatDuraction }}</small>
       <small class="date">Date: {{ courseListItem.creationDate | date: "MM.dd.yyyy"}}</small>
       <button type="button" class="btn btn-primary btn-sm edit">Edit</button>
       <button type="button" class="btn btn-primary btn-sm delete" (click)="deleteCourse()">Delete</button>
