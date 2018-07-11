@@ -10,7 +10,7 @@ export class CourseItem implements CourseItemInterface {
     description: string;
     topRated: boolean;
 
-    constructor(id: number, title: string, author: string, description: string, duraction?: Number, creationDate?: Date, topRated?: boolean) {
+    constructor(id: number, title: string, author: string, description: string, duraction?: Number, creationDate?: Date, topRated: boolean = false) {
         this.id = id;
         this.title = title;
         this.author = author;

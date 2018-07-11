@@ -9,7 +9,7 @@ import { FindPipe } from '../../pipes/find.pipe';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { FormatDuractionPipe } from '../../pipes/format-duraction.pipe';
 
-const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
+const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10), true);
 const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
 @Component ({
   template: `
@@ -52,6 +52,8 @@ describe('CourseListItemComponent', () => {
     const courseElements = fixture.debugElement.queryAll(By.css('.course'));
     expect(courseElements.length).toBe(2);
     const firstCourseElement = courseElements[0];
+    const secondCourseElement = courseElements[1];
+
     const deleteButton = firstCourseElement.query(By.css('.delete'));
     expect(deleteButton).toBeTruthy();
     expect(firstCourseElement.query(By.css('.title')).nativeElement.textContent).toBe(firstCourseItem.title.toUpperCase());
@@ -59,6 +61,10 @@ describe('CourseListItemComponent', () => {
     expect(firstCourseElement.query(By.css('.author')).nativeElement.textContent).toBe('Author: ' + firstCourseItem.author);
     expect(firstCourseElement.query(By.css('.duraction')).nativeElement.textContent).toBe('Duraction: ' + firstCourseItem.duraction + 'min.');
     expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + (firstCourseItem.creationDate.getMonth() + 1) + '.' + firstCourseItem.creationDate.getDate() + '.' + firstCourseItem.creationDate.getFullYear());
+    expect(firstCourseElement.classes.rated).toBeTruthy();
+
+    expect(secondCourseElement.classes.rated).toBeFalsy();
+
   });
 
   it('should delete course', () => {

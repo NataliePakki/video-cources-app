@@ -8,7 +8,9 @@ export class FindPipe implements PipeTransform {
 
   transform(courses: CourseItemInterface[], findValue: string): CourseItemInterface[] {
     return courses.filter(function(course) {
-      return course;
+      if (course.author.indexOf(findValue) > -1 || course.title.indexOf(findValue) > -1 || course.description.indexOf(findValue) > -1) {
+        return course;
+      }
     });
   }
 }

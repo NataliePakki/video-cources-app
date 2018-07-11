@@ -16,7 +16,7 @@ export class HighlightDirective {
 
     const courseTime = courseItem.creationDate.getTime();
 
-    if (courseTime < currTime &&  courseTime >= freshTime) {
+    if (courseTime <= currTime &&  courseTime >= freshTime) {
       color = 'rgba(0, 165, 114, 0.5)';
 
     } else if (courseTime > currTime) {
