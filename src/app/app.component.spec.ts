@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
     expect(fixture.debugElement.query(By.css('app-header'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('app-breadcrumbs'))).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('app-course-list'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('router-outlet'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('app-footer'))).toBeTruthy();
   }));
 });

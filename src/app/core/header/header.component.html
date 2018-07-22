@@ -5,13 +5,16 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Home</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="isAuthenticated()"class="nav-item">
           <a class="nav-link active" href="#">Video Courses</a>
         </li>
       </ul>
-      <ul class="navbar-nav my-2 my-lg-0">
-          <li><a class="nav-link" href="./">User Login</a></li>
-          <li><button class="btn btn-secondary my-2 my-sm-0" href="./">Log off</button></li>
+      <ul *ngIf="isAuthenticated()" class="navbar-nav my-2 my-lg-0">
+          <li><a id="user-login" class="nav-link" href="./">{{ getUserInfo() }}</a></li>
+          <li><button id="logOff" class="btn btn-secondary my-2 my-sm-0" (click)="logOff()">Log off</button></li>
       </ul>
+      <ul *ngIf="!isAuthenticated()" class="navbar-nav my-2 my-lg-0">
+        <li><button id="login" class="btn btn-secondary my-2 my-sm-0" [routerLink]="['auth/login']">Log in</button></li>
+    </ul>
     </div>
 </nav>
