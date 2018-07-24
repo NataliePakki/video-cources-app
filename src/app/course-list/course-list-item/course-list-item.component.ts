@@ -12,7 +12,7 @@ export class CourseListItemComponent implements OnInit {
   starImagePath: string;
 
   deleteCourse(event: any) {
-    event.preventDefault();
+    event && event.preventDefault();
     this.delete.emit(this.courseListItem.id);
   }
   constructor() {
