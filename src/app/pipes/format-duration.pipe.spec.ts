@@ -1,9 +1,9 @@
-import { FormatDuractionPipe } from './format-duraction.pipe';
+import { FormatDurationPipe } from './format-duration.pipe';
 
-describe('FormatDuractionPipe', () => {
-  let pipe: FormatDuractionPipe;
+describe('FormatDurationPipe', () => {
+  let pipe: FormatDurationPipe;
   it('create an instance', () => {
-    pipe = new FormatDuractionPipe();
+    pipe = new FormatDurationPipe();
     expect(pipe).toBeTruthy();
   });
 

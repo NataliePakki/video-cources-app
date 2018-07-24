@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 import { OrderByPipe } from '../../pipes/order-by.pipe';
 import { FindPipe } from '../../pipes/find.pipe';
 import { HighlightDirective } from '../../directives/highlight.directive';
-import { FormatDuractionPipe } from '../../pipes/format-duraction.pipe';
+import { FormatDurationPipe } from '../../pipes/format-duration.pipe';
 
 const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10), true);
 const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
@@ -35,8 +35,8 @@ describe('CourseListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ FindPipe, OrderByPipe, FormatDuractionPipe ],
-      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDuractionPipe, CourseListItemComponent, TestHostComponent ]
+      providers: [ FindPipe, OrderByPipe, FormatDurationPipe ],
+      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDurationPipe, CourseListItemComponent, TestHostComponent ]
     })
     .compileComponents();
   }));
@@ -59,7 +59,7 @@ describe('CourseListItemComponent', () => {
     expect(firstCourseElement.query(By.css('.title')).nativeElement.textContent).toBe(firstCourseItem.title.toUpperCase());
     expect(firstCourseElement.query(By.css('.description')).nativeElement.textContent).toBe(firstCourseItem.description);
     expect(firstCourseElement.query(By.css('.author')).nativeElement.textContent).toBe('Author: ' + firstCourseItem.author);
-    expect(firstCourseElement.query(By.css('.duraction')).nativeElement.textContent).toBe('Duraction: ' + firstCourseItem.duraction + 'min.');
+    expect(firstCourseElement.query(By.css('.duration')).nativeElement.textContent).toBe('Duration: ' + firstCourseItem.duration + 'min.');
     expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + (firstCourseItem.creationDate.getMonth() + 1) + '.' + firstCourseItem.creationDate.getDate() + '.' + firstCourseItem.creationDate.getFullYear());
     expect(firstCourseElement.classes.rated).toBeTruthy();
 

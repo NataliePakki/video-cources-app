@@ -11,7 +11,8 @@ export class CourseListItemComponent implements OnInit {
   @Output() delete = new EventEmitter<number>();
   starImagePath: string;
 
-  deleteCourse() {
+  deleteCourse(event: any) {
+    event.preventDefault();
     this.delete.emit(this.courseListItem.id);
   }
   constructor() {

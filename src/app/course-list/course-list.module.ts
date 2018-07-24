@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { FindPipe } from '../pipes/find.pipe';
 import { OrderByPipe } from '../pipes/order-by.pipe';
 import { HighlightDirective } from '../directives/highlight.directive';
-import { FormatDuractionPipe } from '../pipes/format-duraction.pipe';
+import { FormatDurationPipe } from '../pipes/format-duration.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { FormatDuractionPipe } from '../pipes/format-duraction.pipe';
     FormsModule
   ],
   providers: [ FindPipe, OrderByPipe ],
-  declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDuractionPipe, OrderByPipe, FindPipe ],
+  declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDurationPipe, OrderByPipe, FindPipe ],
   exports: [ CourseListComponent ]
 })
 export class CourseListModule { }

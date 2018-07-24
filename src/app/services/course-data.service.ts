@@ -39,7 +39,7 @@ export class CourseDataService {
         c.author = course.author;
         c.creationDate = course.creationDate;
         c.description = course.description;
-        c.duraction = course.duraction;
+        c.duration = course.duration;
         c.title = course.title;
         c.topRated = course.topRated;
         return true;

@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'formatDuraction'
+  name: 'formatDuration'
 })
-export class FormatDuractionPipe implements PipeTransform {
+export class FormatDurationPipe implements PipeTransform {
 
-  transform(duraction: number): string {
-    const hour = Math.floor(duraction / 60);
-    const min = duraction % 60;
+  transform(duration: number): string {
+    const hour = Math.floor(duration / 60);
+    const min = duration % 60;
     let result = '';
     if (hour >= 1)  {
       result += hour + 'h. ';
