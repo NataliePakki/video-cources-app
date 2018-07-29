@@ -4,7 +4,7 @@ import { BreadcrumbsComponent } from './breadcrumbs.component';
 import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services';
 import { Observable } from '../../../../node_modules/rxjs';
 
 class MockAuthService extends AuthService {}

@@ -4,10 +4,8 @@ import { CourseListItemComponent } from './course-list-item.component';
 import { Component } from '@angular/core';
 import { CourseItem } from '../models/course-item';
 import { By } from '@angular/platform-browser';
-import { OrderByPipe } from '../../pipes/order-by.pipe';
-import { FindPipe } from '../../pipes/find.pipe';
-import { HighlightDirective } from '../../directives/highlight.directive';
-import { FormatDurationPipe } from '../../pipes/format-duration.pipe';
+import { FindPipe, FormatDurationPipe, OrderByPipe } from '../../pipes';
+import { HighlightDirective } from '../../directives';
 
 const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10), true);
 const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));

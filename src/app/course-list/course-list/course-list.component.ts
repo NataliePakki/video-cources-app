@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CourseItem } from '../models/course-item';
-import { FindPipe } from '../../pipes/find.pipe';
-import { CourseDataService } from '../../services/course-data.service';
+import { FindPipe } from '../../pipes';
+import { CourseDataService } from '../../services';
 
 @Component({
   selector: 'app-course-list',

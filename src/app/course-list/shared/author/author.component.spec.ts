@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DateComponent } from './date.component';
+import { AuthorComponent } from './author.component';
 import { FormsModule } from '@angular/forms';
 import { Component } from '../../../../../node_modules/@angular/core';
 import { CourseItem } from '../../models/course-item';
-import { FormatDurationPipe } from '../../../pipes/format-duration.pipe';
+import { FormatDurationPipe } from '../../../pipes';
 
 @Component ({
   template: `
-    <app-date [model]="model"></app-date> `
+    <app-author [model]="model"></app-author> `
 })
 class TestHostComponent {
   public model = new CourseItem(0, '', '', '');
@@ -21,7 +21,7 @@ describe('DateComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
-      declarations: [ FormatDurationPipe, DateComponent, TestHostComponent ]
+      declarations: [ FormatDurationPipe, AuthorComponent, TestHostComponent ]
     })
     .compileComponents();
   }));

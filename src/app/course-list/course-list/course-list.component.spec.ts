@@ -6,10 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { CourseItem } from '../models/course-item';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from '@angular/core';
-import { OrderByPipe } from '../../pipes/order-by.pipe';
-import { HighlightDirective } from '../../directives/highlight.directive';
-import { FindPipe } from '../../pipes/find.pipe';
-import { CourseDataService } from '../../services/course-data.service';
+import { HighlightDirective } from '../../directives';
+import { FindPipe, OrderByPipe } from '../../pipes';
+import { CourseDataService } from '../../services';
 
 @Component({
   selector: 'app-course-list-item',

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 import { BreadCrumb } from './breadcrumbs.model';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-breadcrumbs',

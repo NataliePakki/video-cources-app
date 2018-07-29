@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 import { LoginComponent } from './login.component';
 import { FormsModule } from '../../../../node_modules/@angular/forms';
 import { Router } from '../../../../node_modules/@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services';
 
 class MockAuthService extends AuthService {}
 
