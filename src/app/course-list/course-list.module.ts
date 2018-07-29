@@ -8,14 +8,20 @@ import { FindPipe } from '../pipes/find.pipe';
 import { OrderByPipe } from '../pipes/order-by.pipe';
 import { HighlightDirective } from '../directives/highlight.directive';
 import { FormatDurationPipe } from '../pipes/format-duration.pipe';
+import { CreateCourseListItemComponent } from './create-course-list-item/create-course-list-item.component';
+import { RouterModule } from '../../../node_modules/@angular/router';
+import { DateComponent } from './create-course-list-item/date/date.component';
+import { AuthorComponent } from './create-course-list-item/author/author.component';
+import { DurationComponent } from './create-course-list-item/duration/duration.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   providers: [ FindPipe, OrderByPipe ],
-  declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDurationPipe, OrderByPipe, FindPipe ],
+  declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDurationPipe, OrderByPipe, FindPipe, CreateCourseListItemComponent, DateComponent, AuthorComponent, DurationComponent ],
   exports: [ CourseListComponent ]
 })
 export class CourseListModule { }

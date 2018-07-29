@@ -3,8 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ToolboxComponent } from './toolbox.component';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { Component } from '../../../../node_modules/@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
 
+
+const mockRouter = {
+  navigate: jasmine.createSpy('navigate')
+};
 
 @Component({
   template: '<app-toolbox (find)=onFind($event)></app-toolbox>'
@@ -23,7 +28,9 @@ describe('ToolboxComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
-      declarations: [ ToolboxComponent, TestHostComponent ]
+      declarations: [ ToolboxComponent, TestHostComponent ],
+      providers: [{ provide: Router, useValue: mockRouter }],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

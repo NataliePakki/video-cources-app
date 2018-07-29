@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CourseItem } from '../models/course-item';
 import { FindPipe } from '../../pipes/find.pipe';
 import { CourseDataService } from '../../services/course-data.service';
@@ -7,7 +7,8 @@ import { CourseDataService } from '../../services/course-data.service';
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css'],
-  providers: [ CourseDataService ]
+  providers: [ CourseDataService ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseListComponent implements OnInit {
   courseListsItems: CourseItem [];

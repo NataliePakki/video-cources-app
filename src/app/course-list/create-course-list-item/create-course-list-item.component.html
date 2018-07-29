@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Create course</h1>
+  <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title"
+              required
+              [(ngModel)]="model.title" name="title"
+              #name="ngModel">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea type="text" class="form-control" id="description"
+              required
+              [(ngModel)]="model.description" name="description"
+              #name="ngModel">
+      </textarea>
+    </div>
+
+    <app-date [model]="model"></app-date>
+    <app-duration [model]="model"></app-duration>
+    <app-author [model]="model"></app-author>
+
+    <button type="submit" class="btn btn-success" [disabled]="!courseForm.form.valid">Save</button>
+    <button class="btn btn-cancel">Cancel</button>
+
+  </form>
+</div>

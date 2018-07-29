@@ -2,14 +2,10 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 
 import { HeaderComponent } from './header.component';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '../../../../node_modules/@angular/router';
-import { NO_ERRORS_SCHEMA, Component } from '../../../../node_modules/@angular/core';
+import { Router } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-@Component({
-    template: ''
-})
-class MockComponent {}
 
 class MockAuthService extends AuthService {}
 
@@ -24,7 +20,6 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-          MockComponent,
           HeaderComponent
         ],
       providers: [

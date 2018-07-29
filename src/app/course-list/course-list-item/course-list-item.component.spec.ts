@@ -72,4 +72,13 @@ describe('CourseListItemComponent', () => {
     deleteButton.triggerEventHandler('click', null);
     expect(hostComponent.deletedElement).toBe(firstCourseItem.id);
   });
+
+  it('should delete course event preventDefault', () => {
+    const deleteButton = fixture.debugElement.query(By.css('.delete'));
+    const spyPreventDefault = jasmine.createSpy('preventDefault');
+    deleteButton.triggerEventHandler('click', { preventDefault : spyPreventDefault });
+    expect(hostComponent.deletedElement).toBe(firstCourseItem.id);
+    expect(spyPreventDefault).toHaveBeenCalled();
+
+  });
 });

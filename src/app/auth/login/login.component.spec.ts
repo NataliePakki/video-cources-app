@@ -18,7 +18,7 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-      imports: [ FormsModule,  ],
+      imports: [ FormsModule ],
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: AuthService, useClass: MockAuthService}
@@ -46,7 +46,7 @@ describe('LoginComponent', () => {
         component.login();
 
         expect(spyLogin).toHaveBeenCalled();
-        expect(mockRouter.navigate).toHaveBeenCalledWith(['/courses']);
+        expect(mockRouter.navigate).toHaveBeenCalledWith(['/courses/list']);
         expect(spyLog).toHaveBeenCalledWith('logged in successfully');
       }));
   });

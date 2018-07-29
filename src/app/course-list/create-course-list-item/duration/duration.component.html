@@ -1,0 +1,9 @@
+<div class="form-group">
+  <label for="duration">Duration (min)</label>
+  <input type="number" class="form-control" #duration
+          required
+          (keyup)="onKey(duration.value)"
+          [(ngModel)]="model.duration" name="duration"
+          #name="ngModel">
+</div>
+{{formatDuration | formatDuration}}
