@@ -7,10 +7,12 @@ import { CourseListModule } from './course-list/course-list.module';
 import { AuthService } from './services';
 import { AuthModule } from './auth/auth.module';
 import { routing } from './app.routing';
+import { NoContentComponent } from './no-content/no-content.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NoContentComponent
   ],
   imports: [
     routing,

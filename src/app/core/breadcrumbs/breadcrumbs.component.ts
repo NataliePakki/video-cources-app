@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 import { BreadCrumb } from './breadcrumbs.model';
-import { AuthService } from '../../services';
+import { AuthService, EventService } from '../../services';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -10,20 +10,28 @@ import { AuthService } from '../../services';
 })
 
 export class BreadcrumbsComponent implements OnInit {
- breadcrumbs: BreadCrumb[];
+  breadcrumbs: BreadCrumb[];
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               public cd: ChangeDetectorRef,
+              private eventService: EventService,
               private authService: AuthService) {
       this.cd.detach();
   }
 
   ngOnInit() {
-    this.router.events.subscribe( event => {
+    const self = this;
+
+    self.router.events.subscribe( event => {
       if (event.constructor.name === 'NavigationEnd') {
-        this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
-        this.cd.detectChanges();
+        self.breadcrumbs = self.buildBreadCrumb(self.activatedRoute.root);
+        self.cd.detectChanges();
       }
+    });
+
+    self.eventService.on('refreshBreadcrumbs', function() {
+      self.breadcrumbs = self.buildBreadCrumb(self.activatedRoute.root);
+      self.cd.detectChanges();
     });
   }
 
@@ -40,7 +48,7 @@ export class BreadcrumbsComponent implements OnInit {
       const breadcrumb = {
           label: label,
           url: nextUrl,
-          exact: true
+          isClickable: true
       };
 
       let newBreadcrumbs;
@@ -52,7 +60,7 @@ export class BreadcrumbsComponent implements OnInit {
       if (route.firstChild) {
           return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
       }
-      newBreadcrumbs[newBreadcrumbs.length - 1].exact = false;
+      newBreadcrumbs[newBreadcrumbs.length - 1].isClickable = false;
 
       return newBreadcrumbs;
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CourseItemInterface } from '../../models/course-item.model';
 
 @Component({
   selector: 'app-date',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./date.component.css']
 })
 export class DateComponent implements OnInit {
-  @Input() model;
+  @Input() model: CourseItemInterface;
   constructor() { }
 
   ngOnInit() {

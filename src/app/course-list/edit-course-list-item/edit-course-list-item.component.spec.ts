@@ -1,25 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateCourseListItemComponent } from './create-course-list-item.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { EditCourseListItemComponent } from './edit-course-list-item.component';
 import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventService } from '../../services';
 
+class ActivatedRouteStub {}
 const mockRouter = {
   navigate: jasmine.createSpy('navigate')
 };
 
-class ActivatedRouteStub {}
-
-describe('CreateCourseListItemComponent', () => {
-  let component: CreateCourseListItemComponent;
-  let fixture: ComponentFixture<CreateCourseListItemComponent>;
+describe('EditCourseListItemComponent', () => {
+  let component: EditCourseListItemComponent;
+  let fixture: ComponentFixture<EditCourseListItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [ CreateCourseListItemComponent ],
+      declarations: [ EditCourseListItemComponent ],
       providers: [
+        ChangeDetectorRef,
+        EventService,
         { provide: Router, userValue: mockRouter },
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
       ],
@@ -29,7 +31,7 @@ describe('CreateCourseListItemComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCourseListItemComponent);
+    fixture = TestBed.createComponent(EditCourseListItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

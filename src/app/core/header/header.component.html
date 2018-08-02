@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <a class="navbar-brand" href="#">Video Courses</a>
+  <a class="navbar-brand" routerLink="courses/list">Video Courses</a>
   <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" routerLink="courses/list">Home</a>
         </li>
         <li *ngIf="isAuthenticated()"class="nav-item">
-          <a class="nav-link active" href="#">Video Courses</a>
+          <a class="nav-link active" routerLink="courses/list">Video Courses</a>
         </li>
       </ul>
       <ul *ngIf="isAuthenticated()" class="navbar-nav my-2 my-lg-0">

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Create course</h1>
+  <h1>Edit course</h1>
   <form (ngSubmit)="onSubmit()" #courseForm="ngForm">
     <div class="form-group">
       <label for="title">Title</label>
@@ -24,6 +24,5 @@
 
     <button type="submit" class="btn btn-success" [disabled]="!courseForm.form.valid">Save</button>
     <button [routerLink]="['/courses/list']" class="btn btn-cancel">Cancel</button>
-
   </form>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CourseItemInterface } from '../../models/course-item.model';
 
 @Component({
   selector: 'app-author',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./author.component.css']
 })
 export class AuthorComponent implements OnInit {
-  @Input() model;
+  @Input() model: CourseItemInterface;
   constructor() { }
 
   ngOnInit() {}

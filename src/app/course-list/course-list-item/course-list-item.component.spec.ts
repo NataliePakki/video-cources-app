@@ -1,11 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseListItemComponent } from './course-list-item.component';
-import { Component } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CourseItem } from '../models/course-item';
 import { By } from '@angular/platform-browser';
 import { FindPipe, FormatDurationPipe, OrderByPipe } from '../../pipes';
 import { HighlightDirective } from '../../directives';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+
+const mockRouter = {
+  navigate: jasmine.createSpy('navigate')
+};
+
+class ActivatedRouteStub {}
 
 const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10), true);
 const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
@@ -33,8 +40,12 @@ describe('CourseListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ FindPipe, OrderByPipe, FormatDurationPipe ],
-      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDurationPipe, CourseListItemComponent, TestHostComponent ]
+      imports: [ RouterModule],
+      providers: [ FindPipe, OrderByPipe, FormatDurationPipe,
+        { provide: Router, userValue: mockRouter },
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub }, ],
+      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDurationPipe, CourseListItemComponent, TestHostComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

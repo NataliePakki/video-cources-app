@@ -3,8 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { CourseListComponent } from './course-list/course-list/course-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CreateCourseListItemComponent } from './course-list/create-course-list-item/create-course-list-item.component';
+import { EditCourseListItemComponent } from './course-list/edit-course-list-item/edit-course-list-item.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NoContentComponent } from './no-content/no-content.component';
 
 const appRoutes: Routes = [
+    {
+        path: '', redirectTo: 'courses/list', pathMatch: 'full'
+    },
     {
         path: 'courses',
         data: {
@@ -29,9 +35,16 @@ const appRoutes: Routes = [
                 data: {
                     breadcrumb: 'Create'
                 }
+            },
+            {
+                path: ':id',
+                component: EditCourseListItemComponent,
+                data: {
+                    breadcrumb: 'View',
+                }
             }
-        ]
-        // canActivate: [AuthGuard]
+        ],
+        canActivate: [AuthGuard]
     },
     {
         path: 'auth',
@@ -49,8 +62,8 @@ const appRoutes: Routes = [
         ]
     },
 
-    // otherwise redirect to home
-    { path: '**', redirectTo: 'courses/list' }
+    // otherwise redirect to no-content
+    { path: '**', component: NoContentComponent, data: {breadcrumb: '404'} }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

@@ -9,6 +9,8 @@ import { HighlightDirective } from '../directives';
 import { CreateCourseListItemComponent } from './create-course-list-item/create-course-list-item.component';
 import { RouterModule } from '@angular/router';
 import { AuthorComponent, DurationComponent, DateComponent } from './shared';
+import { EditCourseListItemComponent } from './edit-course-list-item/edit-course-list-item.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +18,7 @@ import { AuthorComponent, DurationComponent, DateComponent } from './shared';
     RouterModule
   ],
   providers: [ FindPipe, OrderByPipe ],
-  declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDurationPipe, OrderByPipe, FindPipe, CreateCourseListItemComponent, DateComponent, AuthorComponent, DurationComponent ],
+  declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDurationPipe, OrderByPipe, FindPipe, CreateCourseListItemComponent, DateComponent, AuthorComponent, DurationComponent, EditCourseListItemComponent ],
   exports: [ CourseListComponent ]
 })
 export class CourseListModule { }
