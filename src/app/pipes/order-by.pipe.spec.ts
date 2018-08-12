@@ -3,8 +3,8 @@ import { CourseItem } from '../course-list/models/course-item';
 
 describe('OrderByPipe', () => {
   let pipe: OrderByPipe;
-  const firstCourseListItem = new CourseItem(1, 'abcd', 'Natalie', 'efg', 0, new Date(2018, 4, 4));
-  const secondCourseListItem =  new CourseItem(2, 'ihl', 'Pakki', 'yzd', 0, new Date(2017, 4, 4));
+  const firstCourseListItem = new CourseItem(1, 'abcd', 'Natalie', 'efg', 0, '2018-04-04');
+  const secondCourseListItem =  new CourseItem(2, 'ihl', 'Pakki', 'yzd', 0, '2017-04-04');
 
   let courseListItems = [
     firstCourseListItem, secondCourseListItem

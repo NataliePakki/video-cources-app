@@ -5,9 +5,20 @@ import { AuthService } from '../../services';
 import { Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
 
-class MockAuthService extends AuthService {}
+let stubAuthService = {
+    login() {
+        return of({});
+    },
+    isAuthenticated() {},
+    logout() {},
+    getUserInfo() {
+        return of({});
+    }
+};
 
 const mockRouter = {
   navigate: jasmine.createSpy('navigate')
@@ -19,16 +30,19 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
       declarations: [
           HeaderComponent
         ],
       providers: [
-        { provide: AuthService, useClass: MockAuthService },
+        { provide: AuthService, useValue: stubAuthService },
         { provide: Router, useValue: mockRouter },
       ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
+
+    stubAuthService = TestBed.get(AuthService);
   }));
 
   beforeEach(() => {
@@ -43,7 +57,9 @@ describe('HeaderComponent', () => {
 
   describe('init', () => {
       it('should has userName and logOff button when user is authenticated', () => {
-        spyOn(MockAuthService.prototype, 'isAuthenticated').and.returnValue(true);
+        stubAuthService.isAuthenticated = function() {
+            return true;
+        };
         fixture.detectChanges();
 
 
@@ -58,7 +74,9 @@ describe('HeaderComponent', () => {
       });
 
       it('should has login button when user is not authenticated', () => {
-        spyOn(MockAuthService.prototype, 'isAuthenticated').and.returnValue(false);
+        stubAuthService.isAuthenticated = function() {
+            return false;
+        };
         fixture.detectChanges();
 
         const userLoginElement = fixture.debugElement.query(By.css('#user-login'));
@@ -74,30 +92,28 @@ describe('HeaderComponent', () => {
 
   describe('isAuthenticated', () => {
     it('should call isAuthenticated of AuthService', () => {
-        const spyIsAuthenticated = spyOn(MockAuthService.prototype, 'isAuthenticated');
+        let isCalled = false;
+        stubAuthService.isAuthenticated = function() {
+            isCalled = true;
+        };
 
         component.isAuthenticated();
 
-        expect(spyIsAuthenticated).toHaveBeenCalled();
-      });
-  });
-
-  describe('getUserInfo', () => {
-    it('should call getUserInfo of AuthService', () => {
-        const spyGetUserInfo = spyOn(MockAuthService.prototype, 'getUserInfo');
-
-        component.getUserInfo();
-
-        expect(spyGetUserInfo).toHaveBeenCalled();
+        expect(isCalled).toBeTruthy();
       });
   });
 
   describe('logOff', () => {
     it('should call logout of AuthService and navigate to login', () => {
         const userName = 'user';
-        const spyLogout = spyOn(MockAuthService.prototype, 'logout');
-        const spyGetUserInfo = spyOn(MockAuthService.prototype, 'getUserInfo').and.returnValue(userName);
-        spyOn(MockAuthService.prototype, 'isAuthenticated').and.returnValue(true);
+        let isLogoutCalled = false;
+        stubAuthService.logout = function() {
+            isLogoutCalled = true;
+        };
+        stubAuthService.isAuthenticated = function() {
+            return true;
+        };
+        component.userInfo = userName;
         fixture.detectChanges();
 
         const spyLog = spyOn(console, 'log');
@@ -105,9 +121,8 @@ describe('HeaderComponent', () => {
         const logOffButton = fixture.debugElement.query(By.css('#logOff'));
         logOffButton.triggerEventHandler('click', null);
 
-        expect(spyLogout).toHaveBeenCalled();
+        expect(isLogoutCalled).toBeTruthy();
         expect(mockRouter.navigate).toHaveBeenCalledWith(['/auth/login']);
-        expect(spyGetUserInfo).toHaveBeenCalled();
         expect(spyLog).toHaveBeenCalledWith('User "' + userName + '" logoff.');
       });
   });

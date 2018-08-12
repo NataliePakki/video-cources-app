@@ -5,7 +5,8 @@ import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../services';
-import { Observable } from '../../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 class MockAuthService extends AuthService {}
 
@@ -46,6 +47,7 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
       declarations: [ BreadcrumbsComponent ],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },

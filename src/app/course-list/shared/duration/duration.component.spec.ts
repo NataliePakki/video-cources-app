@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DurationComponent } from './duration.component';
 import { FormsModule } from '@angular/forms';
-import { Component } from '../../../../../node_modules/@angular/core';
+import { Component } from '@angular/core';
 import { CourseItem } from '../../models/course-item';
 import { FormatDurationPipe } from '../../../pipes';
 

@@ -7,7 +7,7 @@
 .course.rated {
     background: rgba(115, 194, 251, 0.15);
 }
-.course .name {
+.course .title {
     grid-column-start: 1;
     grid-column-end: 5;
 }
@@ -25,7 +25,7 @@
     grid-row-start: 3;
     grid-column-start: 1;
 }
-.course .duraction {
+.course .duracion {
     grid-row-start: 3;
     grid-column-start: 2;
 }

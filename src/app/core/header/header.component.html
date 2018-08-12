@@ -10,7 +10,7 @@
         </li>
       </ul>
       <ul *ngIf="isAuthenticated()" class="navbar-nav my-2 my-lg-0">
-          <li><a id="user-login" class="nav-link" href="./">{{ getUserInfo() }}</a></li>
+          <li><a id="user-login" class="nav-link" href="./">{{ userInfo }}</a></li>
           <li><button id="logOff" class="btn btn-secondary my-2 my-sm-0" (click)="logOff()">Log off</button></li>
       </ul>
       <ul *ngIf="!isAuthenticated()" class="navbar-nav my-2 my-lg-0">

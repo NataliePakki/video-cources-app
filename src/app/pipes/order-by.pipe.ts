@@ -7,16 +7,18 @@ import { CourseItemInterface } from '../course-list/models/course-item.model';
 export class OrderByPipe implements PipeTransform {
 
   transform(courses: CourseItemInterface[], sortBy?: string): any {
-    if (sortBy === 'creationDate') {
-      return courses.sort(function(a, b) {
-        if (a.creationDate.getTime() > b.creationDate.getTime()) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    } else {
-      return courses;
+    if (courses) {
+      if (sortBy === 'creationDate') {
+        return courses.sort(function(a, b) {
+          if (new Date(a.creationDate).getTime() > new Date(b.creationDate).getTime()) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+      } else {
+        return courses;
+      }
     }
   }
 }

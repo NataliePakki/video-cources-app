@@ -1,0 +1,52 @@
+{
+	"users": [
+  {
+    "id": 6093,
+    "fakeToken": "58ebfdf7f1f558c5c86e17f6",
+    "name": "Ines",
+    "surname": "Lowe",
+    "login": "Warner",
+    "password": "ea"
+  },
+  {
+    "id": 2905,
+    "fakeToken": "58ebfdf7ec92657b493b24da",
+    "name": "Brock",
+    "surname": "Beasley",
+    "login": "Morales",
+    "password": "id"
+  },
+  {
+    "id": 3619,
+    "fakeToken": "58ebfdf772a49d09aeee10a8",
+    "name": "Aurelia",
+    "surname": "Franks",
+    "login": "Dale",
+    "password": "consequat"
+  },
+  {
+    "id": 3117,
+    "fakeToken": "58ebfdf7b2bab0bdb97711f4",
+    "name": "Serena",
+    "surname": "Henson",
+    "login": "Blackburn",
+    "password": "consectetur"
+  },
+  {
+    "id": 5357,
+    "fakeToken": "58ebfdf7279c92a711dc8918",
+    "name": "Carlson",
+    "surname": "Marsh",
+    "login": "Sparks",
+    "password": "consectetur"
+  },
+  {
+    "id": 7868,
+    "fakeToken": "58ebfdf72728b878deec25aa",
+    "name": "Rae",
+    "surname": "Gonzales",
+    "login": "Trujillo",
+    "password": "ut"
+  }
+]
+}

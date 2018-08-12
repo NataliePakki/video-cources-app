@@ -1,30 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-  constructor(private router: Router, private authService: AuthService) { }
+export class HeaderComponent implements OnInit, OnDestroy {
+  private getUserInfoSubscription: Subscription;
+  userInfo = '';
+  constructor(private router: Router, private authService: AuthService) {
+    const self = this;
+    this.getUserInfoSubscription = this.authService.getUserInfo().subscribe(function(user) {
+      self.userInfo = user.login;
+    });
+  }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
 
   logOff(): void {
-    const userInfo = this.authService.getUserInfo();
+    console.log('User "' + this.userInfo + '" logoff.');
     this.authService.logout();
-    console.log('User "' + userInfo + '" logoff.');
     this.router.navigate(['/auth/login']);
   }
 
-  getUserInfo(): string {
-    return this.authService.getUserInfo();
-  }
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.getUserInfoSubscription.unsubscribe();
   }
 
 }

@@ -1,9 +1,7 @@
 <div class="form-group">
   <label for="creationDate">Date</label>
-  <input type="date" class="form-control" id="creationDate"
-          value="model.creationDate"
+  <input type="date" class="form-control" #creationDate
           required
-          [ngModel] ="model.creationDate | date:'yyyy-MM-dd'"
-          name="creationDate"
-          #name="ngModel">
+          [(ngModel)] ="model.creationDate"
+          value="{{model.creationDate}}">
 </div>

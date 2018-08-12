@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseListItemComponent } from './course-list-item/course-list-item.component';
 import { ToolboxComponent } from './toolbox/toolbox.component';
-import { FormsModule } from '@angular/forms';
 import { FindPipe, OrderByPipe, FormatDurationPipe } from '../pipes';
 import { HighlightDirective } from '../directives';
 import { CreateCourseListItemComponent } from './create-course-list-item/create-course-list-item.component';
 import { RouterModule } from '@angular/router';
 import { AuthorComponent, DurationComponent, DateComponent } from './shared';
 import { EditCourseListItemComponent } from './edit-course-list-item/edit-course-list-item.component';
+import { FormsModule } from '@angular/forms';
+import { CourseDataService } from '../services';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { EditCourseListItemComponent } from './edit-course-list-item/edit-course
     FormsModule,
     RouterModule
   ],
-  providers: [ FindPipe, OrderByPipe ],
+  providers: [ FindPipe, OrderByPipe, CourseDataService ],
   declarations: [ HighlightDirective, CourseListComponent, CourseListItemComponent, ToolboxComponent, FormatDurationPipe, OrderByPipe, FindPipe, CreateCourseListItemComponent, DateComponent, AuthorComponent, DurationComponent, EditCourseListItemComponent ],
   exports: [ CourseListComponent ]
 })

@@ -5,7 +5,7 @@
         <img class="star"*ngIf="courseListItem.topRated" [src]="starImagePath" alt="rated course">
       </div>
       <p class="mb-1 description">{{ courseListItem.description }}</p>
-      <small class="author">Author: {{ courseListItem.author }}</small>
+      <small class="author">Author: {{ courseListItem.author}}</small>
       <small class="duration">Duration: {{ courseListItem.duration | formatDuration }}</small>
       <small class="date">Date: {{ courseListItem.creationDate | date: "MM.dd.yyyy"}}</small>
       <button type="button" [routerLink]="['/courses', courseListItem.id]" class="btn btn-primary btn-sm edit">Edit</button>

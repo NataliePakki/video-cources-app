@@ -1,15 +1,27 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+import { UserInteface } from '../auth/models/user.model';
+const BASE_URL = 'http://localhost:3004/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
+  private loginSubscription: Subscription;
+  private headers = new HttpHeaders({
+    'content-type': 'application/json',
+  });
+  constructor(private http: HttpClient) {
+  }
 
-  constructor() { }
-
-  login(userLogin: string): void {
-    localStorage.setItem('user-login', userLogin);
-    localStorage.setItem('token', this.generateToken());
+  login(userLogin: string, password: string): Observable<any> {
+    const s = this.http.post<any>(`${BASE_URL}/login`, {login: userLogin, password: password}, {headers: this.headers});
+    this.loginSubscription = s.subscribe(function(data) {
+      localStorage.setItem('user-login', userLogin);
+      localStorage.setItem('token', data.token);
+    });
+    return s;
   }
 
   logout(): void {
@@ -25,18 +37,16 @@ export class AuthService {
     }
   }
 
-  getUserInfo(): string {
-    return localStorage.getItem('user-login');
+  getUserInfo(): Observable<UserInteface> {
+    this.headers.set('Authorization', this.getToken());
+    return this.http.post<UserInteface>(`${BASE_URL}/userinfo`, null, { headers: this.headers });
   }
 
-  private generateToken(): string {
-    const stringArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B' , 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!','?'];
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
 
-    let result = '';
-    for (let i = 1; i < 15; i++) {
-      const rndNum = Math.ceil(Math.random() * stringArray.length) - 1;
-      result = result + stringArray[rndNum];
-    }
-    return result;
+  ngOnDestroy() {
+    this.loginSubscription.unsubscribe();
   }
 }

@@ -4,6 +4,7 @@ import { CreateCourseListItemComponent } from './create-course-list-item.compone
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 const mockRouter = {
   navigate: jasmine.createSpy('navigate')
@@ -17,7 +18,7 @@ describe('CreateCourseListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, HttpClientTestingModule],
       declarations: [ CreateCourseListItemComponent ],
       providers: [
         { provide: Router, userValue: mockRouter },

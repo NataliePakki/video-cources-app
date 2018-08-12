@@ -14,8 +14,8 @@ const mockRouter = {
 
 class ActivatedRouteStub {}
 
-const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10), true);
-const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, new Date(2018, 10, 10));
+const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, '10.10.2018', true);
+const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, '10.10.2018');
 @Component ({
   template: `
     <app-course-list-item *ngFor="let item of courseListsItems"
@@ -69,7 +69,7 @@ describe('CourseListItemComponent', () => {
     expect(firstCourseElement.query(By.css('.description')).nativeElement.textContent).toBe(firstCourseItem.description);
     expect(firstCourseElement.query(By.css('.author')).nativeElement.textContent).toBe('Author: ' + firstCourseItem.author);
     expect(firstCourseElement.query(By.css('.duration')).nativeElement.textContent).toBe('Duration: ' + firstCourseItem.duration + 'min.');
-    expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + (firstCourseItem.creationDate.getMonth() + 1) + '.' + firstCourseItem.creationDate.getDate() + '.' + firstCourseItem.creationDate.getFullYear());
+    expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + firstCourseItem.creationDate);
     expect(firstCourseElement.classes.rated).toBeTruthy();
 
     expect(secondCourseElement.classes.rated).toBeFalsy();
