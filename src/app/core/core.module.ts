@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { RouterModule } from '../../../node_modules/@angular/router';
-import { FormsModule } from '../../../node_modules/@angular/forms';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import { FormsModule } from '../../../node_modules/@angular/forms';
     FormsModule,
     CommonModule
   ],
-  declarations: [HeaderComponent, FooterComponent, BreadcrumbsComponent],
-  exports: [HeaderComponent, FooterComponent, BreadcrumbsComponent]
+  declarations: [HeaderComponent, FooterComponent, BreadcrumbsComponent, LoadingComponent],
+  exports: [HeaderComponent, FooterComponent, BreadcrumbsComponent, LoadingComponent]
 })
 export class CoreModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CourseItem } from '../models/course-item';
-import { CourseDataService } from '../../services';
+import { CourseDataService, LoadingService } from '../../services';
 import { CourseItemInterface } from '../models/course-item.model';
 import { Subscription, Subject } from 'rxjs';
 import { skip, debounceTime } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private countSubscription: Subscription;
 
 
-  constructor(private courseDataService: CourseDataService) {
+  constructor(private courseDataService: CourseDataService, private loadingService: LoadingService) {
     this.courseListsItems = [];
     const self = this;
     this.findSubscription = this.find.asObservable().pipe(skip(3)).pipe(debounceTime(500)).subscribe((value) => {
@@ -47,10 +47,12 @@ export class CourseListComponent implements OnInit, OnDestroy {
   }
 
   init() {
+    this.loadingService.start();
     this.courseDataService.getWithParams(this.findValue).subscribe((res: CourseItemInterface[]) => {
       this.courseListsItems = res;
       this.size = this.DEFAULT_SIZE;
       this.isLoadMore = this.size < this.courseListsItems.length;
+      this.loadingService.stop();
     });
   }
 
