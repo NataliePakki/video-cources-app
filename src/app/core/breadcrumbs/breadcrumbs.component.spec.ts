@@ -70,13 +70,4 @@ describe('BreadcrumbsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('isAuthenticated', () => {
-    it('should call isAuthenticated of AuthService', () => {
-        const spyIsAuthenticated = spyOn(MockAuthService.prototype, 'isAuthenticated');
-
-        component.isAuthenticated();
-
-        expect(spyIsAuthenticated).toHaveBeenCalled();
-      });
-  });
 });

@@ -3,7 +3,7 @@
     <app-toolbox [find]="find"></app-toolbox>
     <div class="list-group">
         <div class="message alert alert-info" *ngIf="courseListsItems.length === 0">NO DATA</div>
-        <app-course-list-item *ngFor="let item of (courseListsItems | orderBy:'creationDate')" [courseListItem]="item" (delete)="onDelete($event)"></app-course-list-item>
+        <app-course-list-item *ngFor="let item of (courseListsItems | orderBy:'creationDate') | slice:0:size; let i=index" [courseListItem]="item" (delete)="onDelete($event)"></app-course-list-item>
     </div>
-    <button *ngIf="courseListsItems.length > 0" class="btn btn-primary btn-lg btn-block" (click)="loadMoreCourses()">LOAD MORE</button>
+    <button *ngIf="isLoadMore" class="btn btn-primary btn-lg btn-block" (click)="loadMoreCourses()">LOAD MORE</button>
 </div>

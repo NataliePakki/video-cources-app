@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logOff(): void {
-    console.log('User "' + this.userInfo + '" logoff.');
     this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
@@ -33,5 +32,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.getUserInfoSubscription.unsubscribe();
     this.authSubscription.unsubscribe();
   }
-
 }

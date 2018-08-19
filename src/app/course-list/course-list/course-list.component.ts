@@ -12,12 +12,16 @@ import { skip, debounceTime } from 'rxjs/operators';
 })
 export class CourseListComponent implements OnInit, OnDestroy {
   courseListsItems: CourseItem [];
-  private size = 5;
+  find = new Subject<string>();
+  findValue = '';
+  isLoadMore = false;
+  private DEFAULT_SIZE = 5;
+  private size: number;
   private removeSubscription: Subscription;
   private getWithParamsSubscription: Subscription;
   private findSubscription: Subscription;
-  find = new Subject<string>();
-  findValue = '';
+  private countSubscription: Subscription;
+
 
   constructor(private courseDataService: CourseDataService) {
     this.courseListsItems = [];
@@ -39,12 +43,14 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   loadMoreCourses() {
     this.size += 5;
-    this.init();
+    this.isLoadMore = this.size < this.courseListsItems.length;
   }
 
   init() {
-    this.courseDataService.getWithParams(this.findValue, this.size.toString()).subscribe((res: CourseItemInterface[]) => {
+    this.courseDataService.getWithParams(this.findValue).subscribe((res: CourseItemInterface[]) => {
       this.courseListsItems = res;
+      this.size = this.DEFAULT_SIZE;
+      this.isLoadMore = this.size < this.courseListsItems.length;
     });
   }
 
@@ -56,5 +62,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
     this.removeSubscription && this.removeSubscription.unsubscribe();
     this.getWithParamsSubscription && this.getWithParamsSubscription.unsubscribe();
     this.findSubscription && this.findSubscription.unsubscribe();
+    this.countSubscription && this.countSubscription.unsubscribe();
   }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { CourseItemInterface } from '../course-list/models/course-item.model';
 import { AuthService } from './auth.service';
 
@@ -25,8 +27,8 @@ export class CourseDataService {
     return this.http.get<CourseItemInterface>(`${BASE_URL}/${id}`);
   }
 
-  public getWithParams(textFragment: string, count: string = ''): Observable<CourseItemInterface[]> {
-    return this.http.get<CourseItemInterface[]>(`${BASE_URL}`, {params: {textFragment, count}});
+  public getWithParams(textFragment: string): Observable<CourseItemInterface[]> {
+    return this.http.get<CourseItemInterface[]>(`${BASE_URL}`, {params: {textFragment}});
   }
 
   add(course: CourseItemInterface): Observable<CourseItemInterface> {
