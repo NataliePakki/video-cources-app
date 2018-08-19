@@ -1,5 +1,4 @@
  <form id="search" findForm="ngForm" class="form-inline my-4 my-lg-0">
-  <input [(ngModel)]="findValue" name="findValue" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Name, fragment or date">
-  <button id="find" class="btn btn-secondary my-2 my-sm-0" type="submit" (click)="findCourse()">Find</button>
+  <input [(ngModel)]="findValue" (ngModelChange)="findCourse()" name="findValue" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Name, fragment or date">
 </form>
 <button id="add" type="button" [routerLink]="['/courses/create']" class="btn btn-primary my-2 my-sm-0">Add Course</button>

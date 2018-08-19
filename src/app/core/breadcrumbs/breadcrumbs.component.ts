@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCrumb } from './breadcrumbs.model';
 import { AuthService, EventService } from '../../services';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -9,14 +10,17 @@ import { AuthService, EventService } from '../../services';
   styleUrls: ['./breadcrumbs.component.css']
 })
 
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, OnDestroy {
   breadcrumbs: BreadCrumb[];
+  isAuth = false;
+  private authSubscription: Subscription;
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               public cd: ChangeDetectorRef,
               private eventService: EventService,
               private authService: AuthService) {
       this.cd.detach();
+      this.authSubscription = this.authService.auth().subscribe((isAuth) => this.isAuth = isAuth);
   }
 
   ngOnInit() {
@@ -33,10 +37,6 @@ export class BreadcrumbsComponent implements OnInit {
       self.breadcrumbs = self.buildBreadCrumb(self.activatedRoute.root);
       self.cd.detectChanges();
     });
-  }
-
-  isAuthenticated() {
-    return this.authService.isAuthenticated();
   }
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '',
@@ -63,5 +63,9 @@ export class BreadcrumbsComponent implements OnInit {
       newBreadcrumbs[newBreadcrumbs.length - 1].isClickable = false;
 
       return newBreadcrumbs;
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
   }
 }

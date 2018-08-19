@@ -5,15 +5,15 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="courses/list">Home</a>
         </li>
-        <li *ngIf="isAuthenticated()"class="nav-item">
+        <li *ngIf="isAuth"class="nav-item">
           <a class="nav-link active" routerLink="courses/list">Video Courses</a>
         </li>
       </ul>
-      <ul *ngIf="isAuthenticated()" class="navbar-nav my-2 my-lg-0">
-          <li><a id="user-login" class="nav-link" href="./">{{ userInfo }}</a></li>
+      <ul *ngIf="isAuth" class="navbar-nav my-2 my-lg-0">
+          <li><a id="user-login" class="nav-link" href="./">{{ userInfo | async }}</a></li>
           <li><button id="logOff" class="btn btn-secondary my-2 my-sm-0" (click)="logOff()">Log off</button></li>
       </ul>
-      <ul *ngIf="!isAuthenticated()" class="navbar-nav my-2 my-lg-0">
+      <ul *ngIf="!isAuth" class="navbar-nav my-2 my-lg-0">
         <li><button id="login" class="btn btn-secondary my-2 my-sm-0" [routerLink]="['auth/login']">Log in</button></li>
     </ul>
     </div>

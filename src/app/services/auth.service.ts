@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subscription, of } from 'rxjs';
 import { UserInteface } from '../auth/models/user.model';
 const BASE_URL = 'http://localhost:3004/auth';
 
@@ -9,16 +9,15 @@ const BASE_URL = 'http://localhost:3004/auth';
 })
 export class AuthService implements OnDestroy {
   private loginSubscription: Subscription;
-  private headers = new HttpHeaders({
-    'content-type': 'application/json',
-  });
   constructor(private http: HttpClient) {
   }
-
   login(userLogin: string, password: string): Observable<any> {
-    const s = this.http.post<any>(`${BASE_URL}/login`, {login: userLogin, password: password}, {headers: this.headers});
+    const s = this.http.post<any>(`${BASE_URL}/login`, {login: userLogin, password: password}, {
+      headers: {
+      'content-type': 'application/json',
+      }
+    });
     this.loginSubscription = s.subscribe(function(data) {
-      localStorage.setItem('user-login', userLogin);
       localStorage.setItem('token', data.token);
     });
     return s;
@@ -29,17 +28,27 @@ export class AuthService implements OnDestroy {
       localStorage.removeItem('token');
   }
 
-  isAuthenticated(): boolean {
-    if (localStorage.getItem('user-login') && localStorage.getItem('token')) {
-      return true;
+  auth(): Observable<boolean> {
+    const token = this.getToken();
+    if (token) {
+      return this.http.get<boolean>(`${BASE_URL}`, {
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': token
+        }
+      });
     } else {
-      return false;
+      return of(false);
     }
   }
 
   getUserInfo(): Observable<UserInteface> {
-    this.headers.set('Authorization', this.getToken());
-    return this.http.post<UserInteface>(`${BASE_URL}/userinfo`, null, { headers: this.headers });
+    return this.http.post<UserInteface>(`${BASE_URL}/userinfo`, null, {
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': this.getToken()
+      }
+    });
   }
 
   getToken(): string {

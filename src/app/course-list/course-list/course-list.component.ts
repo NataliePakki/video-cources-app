@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CourseItem } from '../models/course-item';
-import { FindPipe } from '../../pipes';
 import { CourseDataService } from '../../services';
 import { CourseItemInterface } from '../models/course-item.model';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { skip, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-course-list',
@@ -15,10 +15,17 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private size = 5;
   private removeSubscription: Subscription;
   private getWithParamsSubscription: Subscription;
+  private findSubscription: Subscription;
+  find = new Subject<string>();
   findValue = '';
 
-  constructor(private findPipe: FindPipe, private courseDataService: CourseDataService) {
+  constructor(private courseDataService: CourseDataService) {
     this.courseListsItems = [];
+    const self = this;
+    this.findSubscription = this.find.asObservable().pipe(skip(3)).pipe(debounceTime(500)).subscribe((value) => {
+      self.findValue = value;
+      self.init();
+    });
   }
 
   onDelete(id: number) {
@@ -28,11 +35,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
         self.init();
       });
     }
-  }
-
-  onFind(findValue: string) {
-    this.findValue = findValue;
-    this.init();
   }
 
   loadMoreCourses() {
@@ -53,5 +55,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.removeSubscription && this.removeSubscription.unsubscribe();
     this.getWithParamsSubscription && this.getWithParamsSubscription.unsubscribe();
+    this.findSubscription && this.findSubscription.unsubscribe();
   }
 }

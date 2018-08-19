@@ -7,16 +7,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ToolboxComponent implements OnInit {
   @Input() findValue = '';
-  @Output() find = new EventEmitter<string>();
+  @Input() find;
 
-  constructor() { }
+  constructor() {}
 
   findCourse() {
-    console.log('Find: ' + this.findValue);
-    this.find.emit(this.findValue);
+    this.find.next(this.findValue);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

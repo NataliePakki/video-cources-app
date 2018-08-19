@@ -1,6 +1,6 @@
 
 <div class="container">
-    <app-toolbox (find)=onFind($event)></app-toolbox>
+    <app-toolbox [find]="find"></app-toolbox>
     <div class="list-group">
         <div class="message alert alert-info" *ngIf="courseListsItems.length === 0">NO DATA</div>
         <app-course-list-item *ngFor="let item of (courseListsItems | orderBy:'creationDate')" [courseListItem]="item" (delete)="onDelete($event)"></app-course-list-item>

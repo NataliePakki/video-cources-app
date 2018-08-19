@@ -5,9 +5,9 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class EventService {
-  listeners = {};
-  eventsSubject = new Subject();
-  events;
+  private listeners = {};
+  private eventsSubject = new Subject();
+  private events;
 
   constructor() {
     this.events = this.eventsSubject.asObservable();

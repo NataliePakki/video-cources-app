@@ -7,7 +7,6 @@ module.exports = (server) => {
 	router.post('/auth/login', (req, res, next) => {
 		let users = server.db.getState().users,
 			matchedUser = users.find((user) => {
-				console.log(user);
 				return user.login.toUpperCase() === req.body.login.toUpperCase();
 			});
 
@@ -23,7 +22,6 @@ module.exports = (server) => {
 	router.post('/auth/userinfo', (req, res, next) => {
 		let users = server.db.getState().users,
 			matchedUser = users.find((user) => {
-				console.log(user);
 				return user.fakeToken === req.header('Authorization');
 			});
 
@@ -31,6 +29,19 @@ module.exports = (server) => {
 			res.status(401).send('Unauthorized');
 		} else {
 			res.json(matchedUser);
+		}
+	});
+
+	router.get('/auth', (req, res, next) => {
+		let users = server.db.getState().users,
+			matchedUser = users.find((user) => {
+				return user.fakeToken === req.header('Authorization');
+			});
+
+		if(!matchedUser) {
+			res.json(false);
+		} else {
+			res.json(true);
 		}
 	});
 
