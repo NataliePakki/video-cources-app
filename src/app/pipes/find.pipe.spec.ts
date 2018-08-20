@@ -1,13 +1,13 @@
 import { FindPipe } from './find.pipe';
-import { CourseItem } from '../course-list/models/course-item';
+import { Course } from '../courses/models/course';
 
 describe('FindPipe', () => {
   let pipe: FindPipe;
-  const firstCourseListItem = new CourseItem(1, 'abcd', 'Natalie', 'efg');
-  const secondCourseListItem =  new CourseItem(2, 'ihl', 'Pakki', 'yzd');
+  const firstCourse = new Course(1, 'abcd', 'Natalie', 'efg');
+  const secondCourse =  new Course(2, 'ihl', 'Pakki', 'yzd');
 
-  const courseListItems = [
-    firstCourseListItem, secondCourseListItem
+  const courses = [
+    firstCourse, secondCourse
   ];
 
   it('create an instance', () => {
@@ -16,31 +16,31 @@ describe('FindPipe', () => {
   });
 
   it('should find by title', () => {
-    let actual = pipe.transform(courseListItems, 'abcd');
-    expect(actual).toEqual([ firstCourseListItem ]);
+    let actual = pipe.transform(courses, 'abcd');
+    expect(actual).toEqual([ firstCourse ]);
 
-    actual = pipe.transform(courseListItems, 'h');
-    expect(actual).toEqual([ secondCourseListItem ]);
+    actual = pipe.transform(courses, 'h');
+    expect(actual).toEqual([ secondCourse ]);
   });
 
   it('should find by name', () => {
-    let actual = pipe.transform(courseListItems, 'Natalie');
-    expect(actual).toEqual([ firstCourseListItem ]);
+    let actual = pipe.transform(courses, 'Natalie');
+    expect(actual).toEqual([ firstCourse ]);
 
-    actual = pipe.transform(courseListItems, 'Pakki');
-    expect(actual).toEqual([ secondCourseListItem ]);
+    actual = pipe.transform(courses, 'Pakki');
+    expect(actual).toEqual([ secondCourse ]);
   });
 
   it('should find by description', () => {
-    let actual = pipe.transform(courseListItems, 'efg');
-    expect(actual).toEqual([ firstCourseListItem ]);
+    let actual = pipe.transform(courses, 'efg');
+    expect(actual).toEqual([ firstCourse ]);
 
-    actual = pipe.transform(courseListItems, 'yzd');
-    expect(actual).toEqual([ secondCourseListItem ]);
+    actual = pipe.transform(courses, 'yzd');
+    expect(actual).toEqual([ secondCourse ]);
   });
 
   it('should not find', () => {
-    const actual = pipe.transform(courseListItems, 'zzzzz');
+    const actual = pipe.transform(courses, 'zzzzz');
     expect(actual).toEqual([  ]);
   });
 });

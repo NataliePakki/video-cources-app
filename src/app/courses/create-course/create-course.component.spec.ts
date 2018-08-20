@@ -1,20 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CreateCourseListItemComponent } from './create-course-list-item.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+
 import { of } from 'rxjs';
+
+import { CreateCourseComponent } from './create-course.component';
 import { CourseDataService } from '../../services';
 
 let mockRouter = {
   navigate: jasmine.createSpy('navigate')
 };
 
-describe('CreateCourseListItemComponent', () => {
-  let component: CreateCourseListItemComponent;
-  let fixture: ComponentFixture<CreateCourseListItemComponent>;
+describe('CreateCourseComponent', () => {
+  let component: CreateCourseComponent;
+  let fixture: ComponentFixture<CreateCourseComponent>;
   let stubCourseDataService;
 
   beforeEach(async(() => {
@@ -27,7 +28,7 @@ describe('CreateCourseListItemComponent', () => {
     };
     TestBed.configureTestingModule({
       imports: [FormsModule, HttpClientTestingModule],
-      declarations: [ CreateCourseListItemComponent ],
+      declarations: [ CreateCourseComponent ],
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: CourseDataService, useValue: stubCourseDataService }
@@ -42,7 +43,7 @@ describe('CreateCourseListItemComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCourseListItemComponent);
+    fixture = TestBed.createComponent(CreateCourseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

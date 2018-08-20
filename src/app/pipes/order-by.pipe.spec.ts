@@ -1,13 +1,13 @@
 import { OrderByPipe } from './order-by.pipe';
-import { CourseItem } from '../course-list/models/course-item';
+import { Course } from '../courses/models/course';
 
 describe('OrderByPipe', () => {
   let pipe: OrderByPipe;
-  const firstCourseListItem = new CourseItem(1, 'abcd', 'Natalie', 'efg', 0, '2018-04-04');
-  const secondCourseListItem =  new CourseItem(2, 'ihl', 'Pakki', 'yzd', 0, '2017-04-04');
+  const firstCourse = new Course(1, 'abcd', 'Natalie', 'efg', 0, '2018-04-04');
+  const secondCourse =  new Course(2, 'ihl', 'Pakki', 'yzd', 0, '2017-04-04');
 
-  let courseListItems = [
-    firstCourseListItem, secondCourseListItem
+  let courses = [
+    firstCourse, secondCourse
   ];
   it('create an instance', () => {
     pipe = new OrderByPipe();
@@ -15,20 +15,20 @@ describe('OrderByPipe', () => {
   });
 
   it('should orderBy date', () => {
-    const actual = pipe.transform(courseListItems, 'creationDate');
-    expect(actual).toEqual([ secondCourseListItem, firstCourseListItem]);
+    const actual = pipe.transform(courses, 'creationDate');
+    expect(actual).toEqual([ secondCourse, firstCourse]);
   });
 
   it('should orderBy date', () => {
-    courseListItems = [
-      secondCourseListItem, firstCourseListItem
+    courses = [
+      secondCourse, firstCourse
     ];
-    const actual = pipe.transform(courseListItems, 'creationDate');
-    expect(actual).toEqual([ secondCourseListItem, firstCourseListItem]);
+    const actual = pipe.transform(courses, 'creationDate');
+    expect(actual).toEqual([ secondCourse, firstCourse]);
   });
 
   it('should return courseList when orderBy not date', () => {
-    const actual = pipe.transform(courseListItems, 'another');
-    expect(actual).toEqual(courseListItems);
+    const actual = pipe.transform(courses, 'another');
+    expect(actual).toEqual(courses);
   });
 });

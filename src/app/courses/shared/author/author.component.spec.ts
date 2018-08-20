@@ -1,9 +1,9 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import { AuthorComponent } from './author.component';
-import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
-import { CourseItem } from '../../models/course-item';
+import { Course } from '../../models/course';
 import { FormatDurationPipe } from '../../../pipes';
 
 @Component ({
@@ -11,7 +11,7 @@ import { FormatDurationPipe } from '../../../pipes';
     <app-author [model]="model"></app-author> `
 })
 class TestHostComponent {
-  public model = new CourseItem(0, '', '', '');
+  public model = new Course(0, '', '', '');
 }
 
 describe('DateComponent', () => {

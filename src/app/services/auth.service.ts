@@ -2,6 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription, of } from 'rxjs';
 import { UserInteface } from '../auth/models/user.model';
+import { switchMap } from 'rxjs/operators';
+
 const BASE_URL = 'http://localhost:3004/auth';
 
 @Injectable({
@@ -12,15 +14,14 @@ export class AuthService implements OnDestroy {
   constructor(private http: HttpClient) {
   }
   login(userLogin: string, password: string): Observable<any> {
-    const s = this.http.post<any>(`${BASE_URL}/login`, {login: userLogin, password: password}, {
+    return this.http.post<any>(`${BASE_URL}/login`, {login: userLogin, password: password}, {
       headers: {
       'content-type': 'application/json',
       }
-    });
-    this.loginSubscription = s.subscribe(function(data) {
+    }).pipe(switchMap((data) => {
       localStorage.setItem('token', data.token);
-    });
-    return s;
+      return of(data);
+    }));
   }
 
   logout(): void {

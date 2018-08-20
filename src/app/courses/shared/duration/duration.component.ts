@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CourseItemInterface } from '../../models/course-item.model';
+import { Course } from '../../models/course';
 
 @Component({
   selector: 'app-duration',
@@ -7,7 +7,7 @@ import { CourseItemInterface } from '../../models/course-item.model';
   styleUrls: ['./duration.component.css']
 })
 export class DurationComponent implements OnInit {
-  @Input() model: CourseItemInterface;
+  @Input() model: Course;
   formatDuration = '';
 
   constructor() { }

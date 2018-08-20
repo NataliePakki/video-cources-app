@@ -1,9 +1,9 @@
 
 import { Routes, RouterModule } from '@angular/router';
-import { CourseListComponent } from './course-list/course-list/course-list.component';
+import { CoursesComponent } from './courses/courses.component';
 import { LoginComponent } from './auth/login/login.component';
-import { CreateCourseListItemComponent } from './course-list/create-course-list-item/create-course-list-item.component';
-import { EditCourseListItemComponent } from './course-list/edit-course-list-item/edit-course-list-item.component';
+import { CreateCourseComponent } from './courses/create-course/create-course.component';
+import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NoContentComponent } from './no-content/no-content.component';
 
@@ -24,21 +24,21 @@ const appRoutes: Routes = [
             },
             {
                 path: 'list',
-                component: CourseListComponent,
+                component: CoursesComponent,
                 data: {
                     breadcrumb: 'List'
                 },
             },
             {
                 path: 'create',
-                component: CreateCourseListItemComponent,
+                component: CreateCourseComponent,
                 data: {
                     breadcrumb: 'Create'
                 }
             },
             {
                 path: ':id',
-                component: EditCourseListItemComponent,
+                component: EditCourseComponent,
                 data: {
                     breadcrumb: 'View',
                 }

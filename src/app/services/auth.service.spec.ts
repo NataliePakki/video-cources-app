@@ -1,87 +1,99 @@
-// import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
-// import { AuthService } from './auth.service';
+import { AuthService } from './auth.service';
 
-// describe('AuthService', () => {
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       providers: [AuthService]
-//     });
-//   });
+const BASE_URL = 'http://localhost:3004/auth';
 
-//   it('should be created', inject([AuthService], (service: AuthService) => {
-//     expect(service).toBeTruthy();
-//   }));
+describe('AuthService', () => {
+  let httpMock: HttpTestingController;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule ],
+      providers: [ AuthService ]
+    });
 
-//   describe('logout', () => {
-//     it('should remove user-login and token values from localStorage', inject([AuthService], (service: AuthService) => {
-//       const spyRemoveItem = spyOn(localStorage, 'removeItem');
+    httpMock = TestBed.get(HttpTestingController);
+  });
 
-//       service.logout();
+  it('should be created', inject([AuthService], (service: AuthService) => {
+    expect(service).toBeTruthy();
+  }));
 
-//       expect(spyRemoveItem).toHaveBeenCalledWith('token');
-//       expect(spyRemoveItem).toHaveBeenCalledWith('user-login');
-//     }));
-//   });
+  describe('logout', () => {
+    it('should remove user-login and token values from localStorage', inject([AuthService], (service: AuthService) => {
+      const spyRemoveItem = spyOn(localStorage, 'removeItem');
 
-//   describe('login', () => {
-//     it('should set user-login and token values to localStorage', inject([AuthService], (service: AuthService) => {
-//       const spyRemoveItem = spyOn(localStorage, 'setItem');
-//       const userName = 'userName';
+      service.logout();
 
-//       service.login(userName);
+      expect(spyRemoveItem).toHaveBeenCalledWith('token');
+      expect(spyRemoveItem).toHaveBeenCalledWith('user-login');
+    }));
+  });
 
-//       expect(spyRemoveItem).toHaveBeenCalledWith('token', jasmine.any(String));
-//       expect(spyRemoveItem).toHaveBeenCalledWith('user-login', userName);
-//     }));
-//   });
+  describe('login', () => {
+    it('should set user-login and token values to localStorage', inject([AuthService], (service: AuthService) => {
+      const spyRemoveItem = spyOn(localStorage, 'setItem');
+      const login = 'login';
+      const password = 'password';
+      const data = { token: 'token' };
 
-//   describe('getUserInfo', () => {
-//     it('should return user-login', inject([AuthService], (service: AuthService) => {
-//       const userLogin = 'user';
-//       spyOn(localStorage, 'getItem').and.returnValue(userLogin);
+      service.login(login, password).subscribe(() => {
+          expect(spyRemoveItem).toHaveBeenCalledWith('token', data.token);
+      });
 
-//       const userInfo = service.getUserInfo();
+      const req = httpMock.expectOne(`${BASE_URL}/login`);
+      req.flush(data);
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual({login: login, password: password});
+      httpMock.verify();
+    }));
+  });
 
-//       expect(userInfo).toBe(userLogin);
-//     }));
-//   });
+  describe('getUserInfo', () => {
+    it('should return user-login', inject([AuthService], (service: AuthService) => {
+      const login = 'login';
 
-//   describe('isAuthenticated', () => {
-//     it('should return true when user-login and token exist', inject([AuthService], (service: AuthService) => {
-//       spyOn(localStorage, 'getItem').and.returnValue('value');
+      service.getUserInfo().subscribe();
 
-//       const isAuthenticated = service.isAuthenticated();
+      const req = httpMock.expectOne(`${BASE_URL}/userinfo`);
+      req.flush(null);
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual(null);
+      httpMock.verify();
+    }));
+  });
 
-//       expect(isAuthenticated).toBe(true);
-//     }));
+  describe('auth', () => {
 
-//     it('should return false when user-login doesnt exist', inject([AuthService], (service: AuthService) => {
-//       spyOn(localStorage, 'getItem').and.callFake(function(value) {
-//         if (value === 'user-login') {
-//           return undefined;
-//         } else {
-//           return 'value';
-//         }
-//       });
 
-//       const isAuthenticated = service.isAuthenticated();
+    it('should return true', inject([AuthService], (service: AuthService) => {
+      const token = 'token';
+      spyOn(localStorage, 'getItem').and.callFake(function(value) {
+          return token;
+      });
 
-//       expect(isAuthenticated).toBe(false);
-//     }));
+      service.auth().subscribe((auth) => {
+          expect(auth).toBeTruthy();
+      });
 
-//     it('should return false when token doesnt exist', inject([AuthService], (service: AuthService) => {
-//       spyOn(localStorage, 'getItem').and.callFake(function(value) {
-//         if (value === 'token') {
-//           return undefined;
-//         } else {
-//           return 'value';
-//         }
-//       });
+      const req = httpMock.expectOne(`${BASE_URL}`);
+      req.flush(of(true));
+      expect(req.request.method).toBe('GET');
+      httpMock.verify();
+    }));
 
-//       const isAuthenticated = service.isAuthenticated();
+    it('should return false when user-login doesnt exist', inject([AuthService], (service: AuthService) => {
+        spyOn(localStorage, 'getItem').and.callFake(function(value) {
+            return undefined;
+        });
+        service.auth().subscribe((auth) => {
+            expect(auth).toBeFalsy();
+        });
 
-//       expect(isAuthenticated).toBe(false);
-//     }));
-//   });
-// });
+        httpMock.expectNone(`${BASE_URL}`);
+        httpMock.verify();
+      }));
+  });
+});

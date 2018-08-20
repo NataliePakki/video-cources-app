@@ -1,12 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CourseListItemComponent } from './course-list-item.component';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { CourseItem } from '../models/course-item';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+
+import { CourseComponent } from './course.component';
+import { Course } from '../models/course';
 import { FindPipe, FormatDurationPipe, OrderByPipe } from '../../pipes';
 import { HighlightDirective } from '../../directives';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 const mockRouter = {
   navigate: jasmine.createSpy('navigate')
@@ -14,19 +14,19 @@ const mockRouter = {
 
 class ActivatedRouteStub {}
 
-const firstCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, '10.10.2018', true);
-const secondCourseItem: CourseItem = new CourseItem(1, 'title', 'author', 'description', 13, '10.10.2018');
+const firstCourse: Course = new Course(1, 'title', 'author', 'description', 13, '10.10.2018', true);
+const secondCourse: Course = new Course(1, 'title', 'author', 'description', 13, '10.10.2018');
 @Component ({
   template: `
-    <app-course-list-item *ngFor="let item of courseListsItems"
-      [courseListItem]="item"
+    <app-course *ngFor="let item of courseListss"
+      [course]="item"
       (delete)="onDelete($event)">
-    </app-course-list-item>`
+    </app-course>`
 })
 class TestHostComponent {
-  public courseListsItems: CourseItem[] = [
-    firstCourseItem,
-    secondCourseItem
+  public courseListss: Course[] = [
+    firstCourse,
+    secondCourse
   ];
   public deletedElement: number;
   public onDelete(id: number) {
@@ -34,7 +34,7 @@ class TestHostComponent {
   }
 }
 
-describe('CourseListItemComponent', () => {
+describe('CourseComponent', () => {
   let hostComponent: TestHostComponent ;
   let fixture: ComponentFixture<TestHostComponent>;
 
@@ -44,7 +44,7 @@ describe('CourseListItemComponent', () => {
       providers: [ FindPipe, OrderByPipe, FormatDurationPipe,
         { provide: Router, userValue: mockRouter },
         { provide: ActivatedRoute, useClass: ActivatedRouteStub }, ],
-      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDurationPipe, CourseListItemComponent, TestHostComponent ],
+      declarations: [ HighlightDirective, FindPipe, OrderByPipe, FormatDurationPipe, CourseComponent, TestHostComponent ],
       schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
@@ -65,11 +65,11 @@ describe('CourseListItemComponent', () => {
 
     const deleteButton = firstCourseElement.query(By.css('.delete'));
     expect(deleteButton).toBeTruthy();
-    expect(firstCourseElement.query(By.css('.title')).nativeElement.textContent).toBe(firstCourseItem.title.toUpperCase());
-    expect(firstCourseElement.query(By.css('.description')).nativeElement.textContent).toBe(firstCourseItem.description);
-    expect(firstCourseElement.query(By.css('.author')).nativeElement.textContent).toBe('Author: ' + firstCourseItem.author);
-    expect(firstCourseElement.query(By.css('.duration')).nativeElement.textContent).toBe('Duration: ' + firstCourseItem.duration + 'min.');
-    expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + firstCourseItem.creationDate);
+    expect(firstCourseElement.query(By.css('.title')).nativeElement.textContent).toBe(firstCourse.title.toUpperCase());
+    expect(firstCourseElement.query(By.css('.description')).nativeElement.textContent).toBe(firstCourse.description);
+    expect(firstCourseElement.query(By.css('.author')).nativeElement.textContent).toBe('Author: ' + firstCourse.author);
+    expect(firstCourseElement.query(By.css('.duration')).nativeElement.textContent).toBe('Duration: ' + firstCourse.duration + 'min.');
+    expect(firstCourseElement.query(By.css('.date')).nativeElement.textContent).toBe('Date: ' + firstCourse.creationDate);
     expect(firstCourseElement.classes.rated).toBeTruthy();
 
     expect(secondCourseElement.classes.rated).toBeFalsy();
@@ -79,14 +79,14 @@ describe('CourseListItemComponent', () => {
   it('should delete course', () => {
     const deleteButton = fixture.debugElement.query(By.css('.delete'));
     deleteButton.triggerEventHandler('click', null);
-    expect(hostComponent.deletedElement).toBe(firstCourseItem.id);
+    expect(hostComponent.deletedElement).toBe(firstCourse.id);
   });
 
   it('should delete course event preventDefault', () => {
     const deleteButton = fixture.debugElement.query(By.css('.delete'));
     const spyPreventDefault = jasmine.createSpy('preventDefault');
     deleteButton.triggerEventHandler('click', { preventDefault : spyPreventDefault });
-    expect(hostComponent.deletedElement).toBe(firstCourseItem.id);
+    expect(hostComponent.deletedElement).toBe(firstCourse.id);
     expect(spyPreventDefault).toHaveBeenCalled();
 
   });

@@ -12,11 +12,11 @@ import { map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit, OnDestroy {
   private getUserInfoSubscription: Subscription;
   private authSubscription: Subscription;
-  userInfo: Observable<string>;
+  userInfo$: Observable<string>;
   isAuth = false;
 
   constructor(private router: Router, private authService: AuthService) {
-    this.userInfo = this.authService.getUserInfo().pipe(map((user) => user.login));
+    this.userInfo$ = this.authService.getUserInfo().pipe(map((user) => user.login));
     this.authSubscription = this.authService.auth().subscribe((isAuth) => this.isAuth = isAuth);
   }
 

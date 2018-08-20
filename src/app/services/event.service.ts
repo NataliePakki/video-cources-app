@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
   private listeners = {};
-  private eventsSubject = new Subject();
+  private eventsSubject$ = new Subject();
   private events;
 
   constructor() {
-    this.events = this.eventsSubject.asObservable();
+    this.events = this.eventsSubject$.asObservable();
 
     this.events.subscribe(
         ({name, args}) => {
@@ -31,7 +31,7 @@ export class EventService {
   }
 
   broadcast(name, ...args) {
-      this.eventsSubject.next({
+      this.eventsSubject$.next({
           name,
           args
       });

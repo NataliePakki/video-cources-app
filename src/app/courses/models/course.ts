@@ -1,6 +1,6 @@
-import {CourseItemInterface} from './course-item.model';
+import { CourseInterface } from './course.model';
 
-export class CourseItem implements CourseItemInterface {
+export class Course implements CourseInterface {
     id: number;
     title: string;
     author: string;

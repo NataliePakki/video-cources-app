@@ -10,15 +10,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 class MockAuthService extends AuthService {}
 
-const mockRouter = {
-  ne: new NavigationEnd(0, '/auth', '/login'),
-  events: new Observable(observer => {
-    observer.next(this.ne);
-    observer.complete();
-  }),
-  navigate: jasmine.createSpy('navigate')
-};
-
 class RouterStub {
   public url = '/';
   ne = new NavigationEnd(0, '/auth', '/login');

@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { CourseListModule } from './course-list/course-list.module';
+import { CoursesModule } from './courses/courses.module';
 import { AuthService } from './services';
 import { AuthModule } from './auth/auth.module';
 import { routing } from './app.routing';
@@ -22,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     CoreModule,
-    CourseListModule,
+    CoursesModule,
     AuthModule
   ],
   providers: [AuthService],

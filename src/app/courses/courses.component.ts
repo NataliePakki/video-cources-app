@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CourseItem } from '../models/course-item';
-import { CourseDataService, LoadingService } from '../../services';
-import { CourseItemInterface } from '../models/course-item.model';
 import { Subscription, Subject } from 'rxjs';
 import { skip, debounceTime } from 'rxjs/operators';
 
+import { Course } from './models/course';
+import { CourseDataService, LoadingService } from '../services';
+
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css']
+  selector: 'app-courses',
+  templateUrl: './courses.component.html',
+  styleUrls: ['./courses.component.css']
 })
-export class CourseListComponent implements OnInit, OnDestroy {
-  courseListsItems: CourseItem [];
+export class CoursesComponent implements OnInit, OnDestroy {
+  courses: Course [];
   find = new Subject<string>();
   findValue = '';
   isLoadMore = false;
+  size: number;
   private DEFAULT_SIZE = 5;
-  private size: number;
   private removeSubscription: Subscription;
   private getWithParamsSubscription: Subscription;
   private findSubscription: Subscription;
@@ -24,7 +24,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
 
   constructor(private courseDataService: CourseDataService, private loadingService: LoadingService) {
-    this.courseListsItems = [];
+    this.courses = [];
     const self = this;
     this.findSubscription = this.find.asObservable().pipe(skip(3)).pipe(debounceTime(500)).subscribe((value) => {
       self.findValue = value;
@@ -43,15 +43,15 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   loadMoreCourses() {
     this.size += 5;
-    this.isLoadMore = this.size < this.courseListsItems.length;
+    this.isLoadMore = this.size < this.courses.length;
   }
 
   init() {
     this.loadingService.start();
-    this.courseDataService.getWithParams(this.findValue).subscribe((res: CourseItemInterface[]) => {
-      this.courseListsItems = res;
+    this.courseDataService.getWithParams(this.findValue).subscribe((res: Course[]) => {
+      this.courses = res;
       this.size = this.DEFAULT_SIZE;
-      this.isLoadMore = this.size < this.courseListsItems.length;
+      this.isLoadMore = this.size < this.courses.length;
       this.loadingService.stop();
     });
   }

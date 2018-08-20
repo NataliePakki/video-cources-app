@@ -1,20 +1,20 @@
 import { Component, ChangeDetectionStrategy, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CourseItem } from '../models/course-item';
+import { Course } from '../models/course';
 
 @Component({
-  selector: 'app-course-list-item',
-  templateUrl: './course-list-item.component.html',
-  styleUrls: ['./course-list-item.component.css'],
+  selector: 'app-course',
+  templateUrl: './course.component.html',
+  styleUrls: ['./course.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseListItemComponent implements OnInit {
-  @Input() courseListItem: CourseItem;
+export class CourseComponent implements OnInit {
+  @Input() course: Course;
   @Output() delete = new EventEmitter<number>();
   starImagePath: string;
 
   deleteCourse(event: any) {
     event && event.preventDefault();
-    this.delete.emit(this.courseListItem.id);
+    this.delete.emit(this.course.id);
   }
   constructor() {
     this.starImagePath = '../../../assets/images/start_icon.svg';

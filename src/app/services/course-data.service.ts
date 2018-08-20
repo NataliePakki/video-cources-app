@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
-import { CourseItemInterface } from '../course-list/models/course-item.model';
+import { Course } from '../courses/models/course';
 import { AuthService } from './auth.service';
 
 const BASE_URL = 'http://localhost:3004/courses';
@@ -19,24 +18,24 @@ export class CourseDataService {
     this.headers.set('Authorization', this.authService.getToken());
   }
 
-  getAll(): Observable<CourseItemInterface[]> {
-      return this.http.get<CourseItemInterface[]>(`${BASE_URL}`);
+  getAll(): Observable<Course[]> {
+      return this.http.get<Course[]>(`${BASE_URL}`);
   }
 
-  get(id: number): Observable<CourseItemInterface> {
-    return this.http.get<CourseItemInterface>(`${BASE_URL}/${id}`);
+  get(id: number): Observable<Course> {
+    return this.http.get<Course>(`${BASE_URL}/${id}`);
   }
 
-  public getWithParams(textFragment: string): Observable<CourseItemInterface[]> {
-    return this.http.get<CourseItemInterface[]>(`${BASE_URL}`, {params: {textFragment}});
+  public getWithParams(textFragment: string): Observable<Course[]> {
+    return this.http.get<Course[]>(`${BASE_URL}`, {params: {textFragment}});
   }
 
-  add(course: CourseItemInterface): Observable<CourseItemInterface> {
-    return this.http.post<CourseItemInterface>(`${BASE_URL}`, course, {headers: this.headers});
+  add(course: Course): Observable<Course> {
+    return this.http.post<Course>(`${BASE_URL}`, course, {headers: this.headers});
   }
 
-  update(course: CourseItemInterface): Observable<CourseItemInterface> {
-    return this.http.put<CourseItemInterface>(`${BASE_URL}/${course.id}`, course, {headers: this.headers});
+  update(course: Course): Observable<Course> {
+    return this.http.put<Course>(`${BASE_URL}/${course.id}`, course, {headers: this.headers});
   }
 
   remove(id: number): Observable<any> {

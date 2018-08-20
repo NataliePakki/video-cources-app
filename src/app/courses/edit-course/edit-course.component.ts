@@ -1,18 +1,19 @@
 import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CourseDataService, EventService } from '../../services';
-import { CourseItem } from '../models/course-item';
-import { CourseItemInterface } from '../models/course-item.model';
+
 import { Subscription } from 'rxjs';
 
+import { CourseDataService, EventService } from '../../services';
+import { Course } from '../models/course';
+
 @Component({
-  selector: 'app-edit-course-list-item',
-  templateUrl: './edit-course-list-item.component.html',
-  styleUrls: ['./edit-course-list-item.component.css']
+  selector: 'app-edit-course',
+  templateUrl: './edit-course.component.html',
+  styleUrls: ['./edit-course.component.css']
 })
-export class EditCourseListItemComponent implements OnInit, OnDestroy {
+export class EditCourseComponent implements OnInit, OnDestroy {
   private updateCourseSubscription: Subscription;
-  @Input() model = new CourseItem(0, '', '', '');
+  @Input() model = new Course(0, '', '', '');
   constructor(private route: ActivatedRoute,
     private router: Router,
     private cd: ChangeDetectorRef,
@@ -21,7 +22,7 @@ export class EditCourseListItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.courseDataService.get(+params['id']).subscribe((res: CourseItemInterface) => {
+      this.courseDataService.get(+params['id']).subscribe((res: Course) => {
         this.model = res;
         this.route.routeConfig.data['breadcrumb'] = this.model.title;
         this.eventService.broadcast('refreshBreadcrumbs');

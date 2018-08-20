@@ -1,16 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CourseItem } from '../models/course-item';
-import { CourseDataService } from '../../services';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { Course } from '../models/course';
+import { CourseDataService } from '../../services';
 
 @Component({
-  selector: 'app-create-course-list-item',
-  templateUrl: './create-course-list-item.component.html',
-  styleUrls: ['./create-course-list-item.component.css']
+  selector: 'app-create-course',
+  templateUrl: './create-course.component.html',
+  styleUrls: ['./create-course.component.css']
 })
-export class CreateCourseListItemComponent implements OnInit, OnDestroy {
-  model = new CourseItem(0, '', '', '');
+export class CreateCourseComponent implements OnInit, OnDestroy {
+  model = new Course(0, '', '', '');
   private createCourseSubscription: Subscription;
   constructor(private courseDataService: CourseDataService, private router: Router) {}
 

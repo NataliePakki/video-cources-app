@@ -1,38 +1,37 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CourseListComponent } from './course-list.component';
-import { FormsModule } from '@angular/forms';
-
-import { By } from '@angular/platform-browser';
-import { CourseItem } from '../models/course-item';
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from '@angular/core';
-import { HighlightDirective } from '../../directives';
-import { FindPipe, OrderByPipe } from '../../pipes';
-import { CourseDataService } from '../../services';
-import { of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
+
+import { CoursesComponent } from './courses.component';
+import { Course } from './models/course';
+import { HighlightDirective } from '../directives';
+import { FindPipe, OrderByPipe } from '../pipes';
+import { CourseDataService } from '../services';
 
 @Component({
   selector: 'app-course-list-item',
   template: '<div class="course"></div>'
 })
-class MockCourseListItemComponent {
-  @Input() courseListItem: CourseItem;
+class MockCoursesComponent {
+  @Input() courses: Course;
   @Output() delete = new EventEmitter();
 }
 
 const fakeCourseList = [
-  new CourseItem(1, 'Video Cource 1', 'Natalie Pakki', this.fakeDescription, 28, '2018-10-29', true),
-  new CourseItem(2, 'Video Cource 2', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
-  new CourseItem(3, 'Video Cource 3', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
-  new CourseItem(4, 'Video Cource 4', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
-  new CourseItem(5, 'Video Cource 5', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
-  new CourseItem(6, 'Video Cource 6', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
+  new Course(1, 'Video Cource 1', 'Natalie Pakki', this.fakeDescription, 28, '2018-10-29', true),
+  new Course(2, 'Video Cource 2', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
+  new Course(3, 'Video Cource 3', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
+  new Course(4, 'Video Cource 4', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
+  new Course(5, 'Video Cource 5', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
+  new Course(6, 'Video Cource 6', 'Natalie Pakki', this.fakeDescription, 30, '2018-5-30'),
 ];
 
-describe('CourseListComponent', () => {
-  let component: CourseListComponent;
-  let fixture: ComponentFixture<CourseListComponent>;
+describe('CoursesComponent', () => {
+  let component: CoursesComponent;
+  let fixture: ComponentFixture<CoursesComponent>;
   let stubCourseDataService;
 
   beforeEach(async(() => {
@@ -59,8 +58,8 @@ describe('CourseListComponent', () => {
       declarations: [
         HighlightDirective,
         OrderByPipe,
-        MockCourseListItemComponent,
-        CourseListComponent ],
+        MockCoursesComponent,
+        CoursesComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
@@ -69,16 +68,16 @@ describe('CourseListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseListComponent);
+    fixture = TestBed.createComponent(CoursesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(component.courseListsItems.length).toBe(6);
-    const courseListItemElements = fixture.debugElement.queryAll(By.css('.course'));
-    expect(courseListItemElements.length).toBe(5);
+    expect(component.courses.length).toBe(6);
+    const courseElements = fixture.debugElement.queryAll(By.css('app-course'));
+    expect(courseElements.length).toBe(5);
     expect(fixture.debugElement.queryAll(By.css('app-toolbox'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('button'))).toBeTruthy();
   });
@@ -88,8 +87,8 @@ describe('CourseListComponent', () => {
     button.triggerEventHandler('click', null);
     fixture.detectChanges();
 
-    const courseListItemElements = fixture.debugElement.queryAll(By.css('.course'));
-    expect(courseListItemElements.length).toBe(6);
+    const courseElements = fixture.debugElement.queryAll(By.css('app-course'));
+    expect(courseElements.length).toBe(6);
     expect(fixture.debugElement.query(By.css('button'))).toBeFalsy();
   });
 
@@ -107,7 +106,7 @@ describe('CourseListComponent', () => {
     const deletedCourseId = 2;
     spyOn(window, 'confirm').and.returnValue(true);
 
-    const course = fixture.debugElement.query(By.css('app-course-list-item'));
+    const course = fixture.debugElement.query(By.css('app-course'));
     course.triggerEventHandler('delete', deletedCourseId);
 
     expect(stubCourseDataService.isRemoveCalled).toBeTruthy();
@@ -120,7 +119,7 @@ describe('CourseListComponent', () => {
     stubCourseDataService.isGetWithParamsCalled = false;
     spyOn(window, 'confirm').and.returnValue(false);
 
-    const course = fixture.debugElement.query(By.css('app-course-list-item'));
+    const course = fixture.debugElement.query(By.css('app-course'));
     course.triggerEventHandler('delete', deletedCourseId);
 
     expect(stubCourseDataService.isRemoveCalled).toBeFalsy();

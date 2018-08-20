@@ -1,12 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ToolboxComponent } from './toolbox.component';
-import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 
+import { ToolboxComponent } from './toolbox.component';
 
 const mockRouter = {
   navigate: jasmine.createSpy('navigate')
