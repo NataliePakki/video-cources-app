@@ -1,4 +1,4 @@
-<ol *ngIf="isAuth" class="breadcrumb">
+<ol *ngIf="isAuth$ | async" class="breadcrumb">
     <li *ngFor="let breadcrumb of breadcrumbs"
         class="breadcrumb-item">
       <a *ngIf="breadcrumb.isClickable" [routerLink]="[breadcrumb.url]">

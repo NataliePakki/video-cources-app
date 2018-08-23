@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService, LoadingService } from '../../services';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { LoadingService } from '../../services';
 import { UserInteface } from '../models/user.model';
-import { User } from '../models/user';
-import { Subscription } from 'rxjs';
+import { User, Authenticate } from '../models/user';
+import * as fromRoot from '../../auth/reducers';
+import * as authAction from '../../auth/actions/auth';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +13,20 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private loginSubscription: Subscription;
-  model: UserInteface = new User(0, '', '');
-  constructor(private router: Router, private authService: AuthService, private loadingService: LoadingService) { }
 
-  ngOnInit() {}
+  model: UserInteface = new User(0, '', '');
+
+  constructor(private authStore: Store<fromRoot.State>, private loadingService: LoadingService) { }
+
+  ngOnInit() {
+  }
 
   login() {
     const self = this;
     self.loadingService.start();
-    this.loginSubscription = this.authService.login(this.model.login, this.model.password).subscribe(function(data) {
-      console.log('logged in successfully');
-      self.loadingService.stop();
-      self.router.navigate(['/courses/list']);
-    });
+    this.authStore.dispatch(new authAction.Login(new Authenticate(this.model.login, this.model.password)));
   }
 
   ngOnDestroy() {
-    this.loginSubscription.unsubscribe();
   }
 }

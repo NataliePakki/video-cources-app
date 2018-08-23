@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription, of } from 'rxjs';
 import { UserInteface } from '../auth/models/user.model';
 import { switchMap } from 'rxjs/operators';
+import { Authenticate } from '../auth/models/user';
 
 const BASE_URL = 'http://localhost:3004/auth';
 
@@ -13,8 +14,8 @@ export class AuthService implements OnDestroy {
   private loginSubscription: Subscription;
   constructor(private http: HttpClient) {
   }
-  login(userLogin: string, password: string): Observable<any> {
-    return this.http.post<any>(`${BASE_URL}/login`, {login: userLogin, password: password}, {
+  login(auth: Authenticate): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}/login`, {login: auth.login, password: auth.password}, {
       headers: {
       'content-type': 'application/json',
       }
@@ -25,7 +26,6 @@ export class AuthService implements OnDestroy {
   }
 
   logout(): void {
-      localStorage.removeItem('user-login');
       localStorage.removeItem('token');
   }
 

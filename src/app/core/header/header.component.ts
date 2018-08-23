@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../../services';
-import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as fromRoot from '../../auth/reducers';
+import * as authAction from '../../auth/actions/auth';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +14,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private getUserInfoSubscription: Subscription;
   private authSubscription: Subscription;
   userInfo$: Observable<string>;
-  isAuth = false;
+  isAuth$;
 
-  constructor(private router: Router, private authService: AuthService) {
-    this.userInfo$ = this.authService.getUserInfo().pipe(map((user) => user.login));
-    this.authSubscription = this.authService.auth().subscribe((isAuth) => this.isAuth = isAuth);
+  constructor(private authStore: Store<fromRoot.State>) {
+    this.userInfo$ = this.authStore.pipe(select(fromRoot.getUser), map((user) => user.login));
+    this.isAuth$ = this.authStore.pipe(select(fromRoot.getLoggedIn));
   }
 
   logOff(): void {
-    this.authService.logout();
-    this.router.navigate(['/auth/login']);
+    this.authStore.dispatch(new authAction.Logout());
   }
 
   ngOnInit() {

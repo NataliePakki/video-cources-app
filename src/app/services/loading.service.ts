@@ -9,11 +9,11 @@ export class LoadingService {
   constructor() { }
 
   stop() {
-    this._loading$.next(false);
+    // this._loading$.next(false);
   }
 
   start() {
-    this._loading$.next(true);
+    // this._loading$.next(true);
   }
 
   loading(): Observable<boolean> {

@@ -1,4 +1,4 @@
-import { UserInteface } from './user.model';
+import { UserInteface, AuthenticateInterface } from './user.model';
 
 export class User implements UserInteface {
     id: number;
@@ -14,5 +14,15 @@ export class User implements UserInteface {
         this.password = password;
         this.name = name;
         this.surname = surname;
+    }
+}
+
+export class Authenticate implements AuthenticateInterface {
+    login: string;
+    password: string;
+
+    constructor(login: string, password: string) {
+        this.login = login;
+        this.password = password;
     }
 }

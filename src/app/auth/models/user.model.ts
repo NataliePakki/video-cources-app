@@ -6,3 +6,8 @@ export interface UserInteface {
     password: string;
     fakeToken: string;
 }
+
+export interface AuthenticateInterface {
+    login: string;
+    password: string;
+}

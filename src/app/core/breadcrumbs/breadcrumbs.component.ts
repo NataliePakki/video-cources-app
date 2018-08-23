@@ -1,8 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BreadCrumb } from './breadcrumbs.model';
-import { AuthService, EventService } from '../../services';
+import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+
+import { BreadCrumb } from './breadcrumbs.model';
+import { EventService } from '../../services';
+import * as fromRoot from '../../auth/reducers';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -12,15 +15,15 @@ import { Subscription } from 'rxjs';
 
 export class BreadcrumbsComponent implements OnInit, OnDestroy {
   breadcrumbs: BreadCrumb[];
-  isAuth = false;
+  isAuth$;
   private authSubscription: Subscription;
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               public cd: ChangeDetectorRef,
               private eventService: EventService,
-              private authService: AuthService) {
+              private authStore: Store<fromRoot.State>) {
       this.cd.detach();
-      this.authSubscription = this.authService.auth().subscribe((isAuth) => this.isAuth = isAuth);
+      this.isAuth$ = this.authStore.pipe(select(fromRoot.getLoggedIn));
   }
 
   ngOnInit() {
