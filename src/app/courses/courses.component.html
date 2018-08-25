@@ -2,8 +2,8 @@
 <div class="container">
     <app-toolbox [find]="find"></app-toolbox>
     <div class="list-group">
-        <div class="message alert alert-info" *ngIf="courses.length === 0">NO DATA</div>
-        <app-course *ngFor="let item of (courses | orderBy:'creationDate') | slice:0:size; let i=index" [course]="item" (delete)="onDelete($event)"></app-course>
+        <div class="message alert alert-info" *ngIf="(courses$ | async).length === 0">NO DATA</div>
+        <app-course *ngFor="let item of (courses$ | async | orderBy:'creationDate') | slice:0:size; let i=index" [course]="item" (delete)="onDelete($event)"></app-course>
     </div>
-    <button *ngIf="isLoadMore" class="btn btn-primary btn-lg btn-block" (click)="loadMoreCourses()">LOAD MORE</button>
+    <button *ngIf=" ( courseCount$ | async ) > size"class="btn btn-primary btn-lg btn-block" (click)="loadMoreCourses()">LOAD MORE</button>
 </div>
