@@ -1,20 +1,21 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import {
     CoursesActionTypes,
     CoursesActions
   } from './course.actions';
-import { CourseState } from './course.states';
+import { CourseState } from './course.state';
 import * as fromAdapter from './course.adapter';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 const initialState: CourseState = fromAdapter.adapter.getInitialState();
 
 export function reducer(state = initialState, action: CoursesActions): CourseState {
     switch (action.type) {
-        case CoursesActionTypes.AddCourse: {
+        case CoursesActionTypes.AddCourseSuccess: {
             return fromAdapter.adapter.addOne(action.payload, state);
         }
 
-        case CoursesActionTypes.RemoveCourse: {
+        case CoursesActionTypes.RemoveCourseSuccess: {
             return fromAdapter.adapter.removeOne(action.payload, state);
         }
 
@@ -22,9 +23,12 @@ export function reducer(state = initialState, action: CoursesActions): CourseSta
             return fromAdapter.adapter.addAll(action.payload.courses, state);
         }
 
+        case CoursesActionTypes.UpdateCourse: {
+            return fromAdapter.adapter.updateOne({ id: action.payload.id, changes: action.payload }, state);
+        }
+
         default:
             return state;
-
     }
 }
 

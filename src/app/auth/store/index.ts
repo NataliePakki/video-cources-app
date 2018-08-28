@@ -1,6 +1,6 @@
 import { ActionReducerMap, createSelector, createFeatureSelector,
     ActionReducer, MetaReducer } from '@ngrx/store';
-import * as fromAuth from './auth';
+import * as fromAuth from './auth.reducer';
 export interface State {
     auth: fromAuth.State;
 }

@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { LoadingService } from '../../services';
 import { UserInteface } from '../models/user.model';
 import { User, Authenticate } from '../models/user';
-import * as fromRoot from '../../auth/reducers';
-import * as authAction from '../../auth/actions/auth';
+import * as fromRoot from '../store/';
+import * as authAction from '../store/auth.actions';
 
 @Component({
   selector: 'app-login',

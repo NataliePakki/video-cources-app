@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as fromRoot from '../../auth/reducers';
-import * as authAction from '../../auth/actions/auth';
+import * as fromRoot from '../../auth/store';
+import * as authAction from '../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',

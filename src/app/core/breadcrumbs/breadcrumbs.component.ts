@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { BreadCrumb } from './breadcrumbs.model';
 import { EventService } from '../../services';
-import * as fromRoot from '../../auth/reducers';
+import * as fromRoot from '../../auth/store';
 
 @Component({
   selector: 'app-breadcrumbs',

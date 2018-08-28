@@ -13,8 +13,8 @@ import { AuthService } from './services';
 import { AuthModule } from './auth/auth.module';
 import { routing } from './app.routing';
 import { NoContentComponent } from './no-content/no-content.component';
-import { reducers, metaReducers } from './auth/reducers';
-import { AuthEffects } from './auth/effects/auth.effects';
+import { reducers, metaReducers } from './auth/store';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [

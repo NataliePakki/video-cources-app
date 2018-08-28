@@ -8,7 +8,7 @@ import { LoadingService } from '../services';
 
 import * as fromCourse from './store/course.reducer';
 import * as coursesAction from './store/course.actions';
-import { CourseState } from './store/course.states';
+import { CourseState } from './store/course.state';
 
 @Component({
   selector: 'app-courses',

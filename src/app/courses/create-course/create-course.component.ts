@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { Course } from '../models/course';
-import { CourseDataService } from '../../services';
+import { CourseState } from '../store/course.state';
+import { AddCourse } from '../store/course.actions';
 
 @Component({
   selector: 'app-create-course',
@@ -12,18 +13,13 @@ import { CourseDataService } from '../../services';
 })
 export class CreateCourseComponent implements OnInit, OnDestroy {
   model = new Course(0, '', '', '');
-  private createCourseSubscription: Subscription;
-  constructor(private courseDataService: CourseDataService, private router: Router) {}
+  constructor(private store: Store<CourseState>, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   onSubmit() {
-    const self = this;
-    this.createCourseSubscription = this.courseDataService.add(this.model).subscribe(function() {
-      self.router.navigate(['courses/list']);
-    });
+    this.store.dispatch(new AddCourse(this.model));
   }
-  ngOnDestroy() {
-    this.createCourseSubscription && this.createCourseSubscription.unsubscribe();
-  }
+
+  ngOnDestroy() {}
 }

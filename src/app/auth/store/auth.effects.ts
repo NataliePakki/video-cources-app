@@ -10,7 +10,7 @@ import {
   LoginSuccess,
   LoginFailure,
   AuthActionTypes,
-} from '../actions/auth';
+} from './auth.actions';
 import { Authenticate } from '../models/user';
 
 @Injectable()

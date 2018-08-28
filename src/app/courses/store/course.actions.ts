@@ -8,6 +8,9 @@ export enum CoursesActionTypes {
   RemoveCourse = '[Courses] Remove Course',
   RemoveCourseSuccess = '[Courses] Remove Course Success',
   RemoveCourseFail = '[Courses] Remove Course Fail',
+  UpdateCourse = '[Courses] Update Course',
+  UpdateCourseSuccess = '[Courses] Update Course Success',
+  UpdateCourseFail = '[Courses] Update Course Fail',
   Load = '[Courses] Load',
   LoadSuccess = '[Courses] Load Success',
   LoadFail = '[Courses] Load Fail',
@@ -25,13 +28,13 @@ export class AddCourse implements Action {
 export class AddCourseSuccess implements Action {
   readonly type = CoursesActionTypes.AddCourseSuccess;
 
-  constructor(public payload: Course[]) {}
+  constructor(public payload: Course) {}
 }
 
 export class AddCourseFail implements Action {
   readonly type = CoursesActionTypes.AddCourseFail;
 
-  constructor(public payload: Course[]) {}
+  constructor(public payload: Course) {}
 }
 
 /**
@@ -53,6 +56,25 @@ export class RemoveCourseFail implements Action {
   readonly type = CoursesActionTypes.RemoveCourseFail;
 
   constructor(public payload: number) {}
+}
+
+/**
+ * Update Course from Courses Actions
+ */
+export class UpdateCourse implements Action {
+  readonly type = CoursesActionTypes.UpdateCourse;
+
+  constructor(public payload: Course) {}
+}
+
+export class UpdateCourseSuccess implements Action {
+  readonly type = CoursesActionTypes.UpdateCourseSuccess;
+
+  constructor(public payload: Course) {}
+}
+
+export class UpdateCourseFail implements Action {
+  readonly type = CoursesActionTypes.UpdateCourseFail;
 }
 
 /**
@@ -83,6 +105,9 @@ export type CoursesActions =
   | RemoveCourse
   | RemoveCourseSuccess
   | RemoveCourseFail
+  | UpdateCourse
+  | UpdateCourseSuccess
+  | UpdateCourseFail
   | Load
   | LoadSuccess
   | LoadFail;

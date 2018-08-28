@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Action } from '@ngrx/store';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, catchError, mergeMap } from 'rxjs/operators';
+import { map, catchError, mergeMap, tap } from 'rxjs/operators';
 import { CourseDataService } from '../../services/course-data.service';
 
 import {
@@ -16,9 +17,11 @@ import {
   RemoveCourseFail,
   RemoveCourseSuccess,
   AddCourse,
+  UpdateCourseFail,
+  UpdateCourseSuccess,
+  UpdateCourse,
 } from './course.actions';
 import { Course } from '../models/course';
-import { CourseState } from './course.states';
 
 @Injectable()
 export class CoursesEffects {
@@ -31,6 +34,7 @@ export class CoursesEffects {
     catchError(error => of(new LoadFail(error))
     )
   );
+
   @Effect()
   addCourse$: Observable<Action> = this.actions$.pipe(
     ofType(CoursesActionTypes.AddCourse),
@@ -38,8 +42,20 @@ export class CoursesEffects {
     mergeMap(course =>
         this.courseService.add(course)
         .pipe(
-          map(() => new AddCourseSuccess([course])),
-          catchError(() => of(new AddCourseFail([course])))
+          map(() => new AddCourseSuccess(course)),
+          catchError(() => of(new AddCourseFail(course)))
+        )
+    )
+  );
+  @Effect()
+  updateCourse$: Observable<Action> = this.actions$.pipe(
+    ofType(CoursesActionTypes.UpdateCourse),
+    map((action: UpdateCourse) => action.payload),
+    mergeMap(course =>
+        this.courseService.update(course)
+        .pipe(
+          map(() => new UpdateCourseSuccess(course)),
+          catchError(() => of(new UpdateCourseFail()))
         )
     )
   );
@@ -57,5 +73,17 @@ export class CoursesEffects {
     )
   );
 
-  constructor(private actions$: Actions, private courseService: CourseDataService) {}
+  @Effect({ dispatch: false })
+  addCourseSuccess$ = this.actions$.pipe(
+    ofType(CoursesActionTypes.AddCourseSuccess),
+    tap(() => this.router.navigate(['courses/list']))
+  );
+
+  @Effect({ dispatch: false })
+  updateCourseSuccess$ = this.actions$.pipe(
+    ofType(CoursesActionTypes.UpdateCourseSuccess),
+    tap(() => this.router.navigate(['courses/list']))
+  );
+
+  constructor(private actions$: Actions, private courseService: CourseDataService, private router: Router) {}
 }
