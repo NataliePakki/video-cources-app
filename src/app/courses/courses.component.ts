@@ -4,7 +4,6 @@ import { skip, debounceTime } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { Course } from './models/course';
-import { LoadingService } from '../services';
 
 import * as fromCourse from './store/course.reducer';
 import * as coursesAction from './store/course.actions';

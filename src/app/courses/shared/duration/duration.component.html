@@ -1,9 +1,8 @@
-<div class="form-group">
-  <label for="duration">Duration (min)</label>
-  <input type="number" class="form-control" #duration
-          required
-          (keyup)="onKey(duration.value)"
-          [(ngModel)]="model.duration" name="duration"
-          #name="ngModel">
+<label for="duration">Duration (min)</label>
+<input class="form-control" [class.ng-invalid]="parseError" #duration
+        (keyup)="onKey(duration.value)"
+        value="{{value}}">
+<div *ngIf="!parseError">
+  {{value | formatDuration}}
 </div>
-{{formatDuration | formatDuration}}
+<div *ngIf="parseError">Duration should be number</div>

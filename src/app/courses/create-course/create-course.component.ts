@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Validators, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { Course } from '../models/course';
 import { CourseState } from '../store/course.state';
 import { AddCourse } from '../store/course.actions';
 
@@ -12,13 +11,20 @@ import { AddCourse } from '../store/course.actions';
   styleUrls: ['./create-course.component.css']
 })
 export class CreateCourseComponent implements OnInit, OnDestroy {
-  model = new Course(0, '', '', '');
-  constructor(private store: Store<CourseState>, private router: Router) {}
+  course = this.fb.group({
+    id: '',
+    title: [ '', [ Validators.required, Validators.maxLength(50), Validators.minLength(2) ]],
+    author: '',
+    creationDate: '',
+    duration: '',
+    description: [ '', [ Validators.required, Validators.maxLength(500)] ]
+  });
+  constructor(private store: Store<CourseState>, private fb: FormBuilder) {}
 
   ngOnInit() {}
 
   onSubmit() {
-    this.store.dispatch(new AddCourse(this.model));
+    this.store.dispatch(new AddCourse(this.course.value));
   }
 
   ngOnDestroy() {}

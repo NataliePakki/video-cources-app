@@ -1,7 +1,8 @@
 <div class="form-group">
   <label for="creationDate">Date</label>
-  <input type="date" class="form-control" #creationDate
-          required
-          [(ngModel)] ="model.creationDate"
-          value="{{model.creationDate}}">
+  <input class="form-control" #creationDate
+          (keyup)="onKey(creationDate.value)"
+          value="{{value}}">
 </div>
+
+<div *ngIf="parseError">Date format should be mm/dd/yyyy</div>
