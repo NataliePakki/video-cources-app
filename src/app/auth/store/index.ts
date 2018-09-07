@@ -27,3 +27,8 @@ export const getLoggedIn = createSelector(
     getAuthState,
     fromAuth.getLoggedIn
 );
+
+export const getLoginError = createSelector(
+    getAuthState,
+    fromAuth.getErrorMessage
+);
