@@ -36,10 +36,7 @@
     <div *ngIf="course.controls.duration.errors" class="error-msg">
         <div *ngIf="course.controls.duration.errors.required; else titleErrors">Duration is required.</div>
     </div>
-    <app-author formControlName="author"></app-author>
-    <div *ngIf="course.controls.author.errors" class="error-msg">
-        <div *ngIf="course.controls.author.errors.required; else titleErrors">Author is required.</div>
-    </div>
+    <app-authors formControlName="authors"></app-authors>
 
     <button [disabled]="course.invalid" type="submit" class="btn btn-success">Save</button>
     <button [routerLink]="['/courses/list']" class="btn btn-cancel">Cancel</button>

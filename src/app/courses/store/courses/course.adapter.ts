@@ -1,5 +1,5 @@
 import { createEntityAdapter } from '@ngrx/entity';
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 
 export const adapter = createEntityAdapter<Course>();
 

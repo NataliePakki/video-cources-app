@@ -10,6 +10,7 @@ import { Course } from '../models/course';
 export class CourseComponent implements OnInit {
   @Input() course: Course;
   @Output() delete = new EventEmitter<number>();
+  authors: string;
   starImagePath: string;
 
   deleteCourse(event: any) {
@@ -21,6 +22,7 @@ export class CourseComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.authors = this.course.authors.map((v) => v.name).join(', ');
   }
 
 }

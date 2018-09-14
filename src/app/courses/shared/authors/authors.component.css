@@ -1,0 +1,123 @@
+.author-sel-ctn {
+    overflow: auto;
+    line-height: 22px;
+    margin-top: 5px;
+}
+
+.author-ctn {
+    height: 30px;
+    position: relative;
+    padding: 0;
+    margin-bottom: 0px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    cursor: default;
+    display: block;
+}
+
+.author-ctn input {
+    border: 0;
+    box-shadow: none;
+    -webkit-transition: none;
+    outline: none;
+    display: block;
+    padding: 4px 6px;
+    line-height: normal;
+    overflow: hidden;
+    height: auto;
+    border-radius: 0;
+    float: left;
+    margin: 2px 0 2px 2px;
+}
+
+.author-trigger {
+    float: right;
+    width: 27px;
+    height:100%;
+    position:absolute;
+    right:0;
+    border-left: 1px solid #CCC;
+    background: #EEE;
+    cursor: pointer;
+    height: 28px;
+}
+
+.author-trigger .author-trigger-ico {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: top;
+    border-top: 4px solid gray;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    content: "";
+    margin-left: 9px;
+    margin-top: 13px;
+}
+
+
+.ng-invalid {
+    border-left: 5px solid #a94442; /* red */
+}
+.author-sel {
+    display: inline-block;
+}
+.author-sel-item {
+    background: #555;
+    color: #EEE;
+    float: left;
+    font-size: 12px;
+    padding: 0 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.author-sel-item .author-close-btn {
+    width: 7px;
+    cursor: pointer;
+    height: 7px;
+    float: right;
+    margin-left: 5px;
+}
+
+.author-res .author-res-item {
+    line-height: 25px;
+    text-align: left;
+    padding: 2px 5px;
+    color: #666;
+    cursor: pointer;
+}
+
+.author-res {
+    position: relative;
+    background: #FFF;
+    overflow-y: auto;
+    z-index: 9999;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

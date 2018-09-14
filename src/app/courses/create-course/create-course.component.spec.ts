@@ -7,7 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
 import { CreateCourseComponent } from './create-course.component';
-import { CourseDataService } from '../../services';
+import { CourseDataService } from '../services';
 
 let mockRouter = {
   navigate: jasmine.createSpy('navigate')

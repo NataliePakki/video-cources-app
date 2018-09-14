@@ -5,9 +5,9 @@ import { Store, select } from '@ngrx/store';
 
 import { Course } from './models/course';
 
-import * as fromCourse from './store/course.reducer';
-import * as coursesAction from './store/course.actions';
-import { CourseState } from './store/course.state';
+import * as fromCourse from './store/courses/course.reducer';
+import * as coursesAction from './store/courses/course.actions';
+import { CourseState } from './store/courses/course.state';
 
 @Component({
   selector: 'app-courses',

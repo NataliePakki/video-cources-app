@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Course } from '../courses/models/course';
-import { AuthService } from './auth.service';
+import { Course } from '../models/course';
+import { AuthService } from '../../services/auth.service';
 
 const BASE_URL = 'http://localhost:3004/courses';
 

@@ -21,7 +21,7 @@ import {
   UpdateCourseSuccess,
   UpdateCourse,
 } from './course.actions';
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 
 @Injectable()
 export class CoursesEffects {

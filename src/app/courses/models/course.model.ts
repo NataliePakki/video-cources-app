@@ -1,7 +1,9 @@
+import { Author } from './author.model';
+
 export interface CourseInterface {
     id: number;
     title: string;
-    author: string;
+    authors: Author[];
     creationDate: string;
     duration: Number;
     description: string;

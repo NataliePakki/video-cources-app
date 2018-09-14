@@ -9,7 +9,7 @@ import { CoursesComponent } from './courses.component';
 import { Course } from './models/course';
 import { HighlightDirective } from '../directives';
 import { FindPipe, OrderByPipe } from '../pipes';
-import * as coursesAction from './store/course.actions';
+import * as coursesAction from './store/course.actios';
 
 
 @Component({

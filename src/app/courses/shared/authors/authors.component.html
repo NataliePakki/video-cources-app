@@ -1,0 +1,14 @@
+<div class="form-group author-sel-ctn">
+    <label for="authors">Authors: </label>
+    <div class="author-sel">
+      <div *ngFor="let author of authors" class="author-sel-item">{{author.name}}<span class="author-close-btn" (click)="remove(author.id)">x</span></div>
+    </div>
+    <div class="author-ctn">
+      <input #authorType type="text" class="form-control" placeholder="Type authors" (keyup)="onKey(authorType.value, $event)">
+      <div (click)="trigger()" id="author-trigger" class="author-trigger"><div class="author-trigger-ico"></div></div>
+    </div>
+    <input type="hidden" class="form-control" value="{{authors}}">
+    <div class="author-res" *ngIf="(suggestedAuthors$ | async).length > 0 && expand">
+      <div class="author-res-item" *ngFor="let suggAuhtor of (suggestedAuthors$ | async)" (click)="add(suggAuhtor)">{{suggAuhtor.name}}</div>
+    </div>
+</div>

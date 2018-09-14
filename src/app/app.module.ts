@@ -15,6 +15,8 @@ import { routing } from './app.routing';
 import { NoContentComponent } from './no-content/no-content.component';
 import { reducers, metaReducers } from './auth/store';
 import { AuthEffects } from './auth/store/auth.effects';
+import { CoursesEffects } from './courses/store/courses/course.effects';
+import { AuthorsEffects } from './courses/store/authors/author.effects';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { AuthEffects } from './auth/store/auth.effects';
     CoursesModule,
     AuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, CoursesEffects, AuthorsEffects]),
     StoreDevtoolsModule.instrument()
 
   ],

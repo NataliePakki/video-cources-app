@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Course } from '../models/course';
+import { Course } from '../../models/course';
 
 export enum CoursesActionTypes {
   AddCourse = '[Courses] Add Course',

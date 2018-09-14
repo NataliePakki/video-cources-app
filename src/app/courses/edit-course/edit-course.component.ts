@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
@@ -7,9 +7,9 @@ import { Subscription } from 'rxjs';
 
 import { EventService } from '../../services';
 import { Course } from '../models/course';
-import { CourseState } from '../store/course.state';
-import * as fromCourse from '../store/course.reducer';
-import { UpdateCourse } from '../store/course.actions';
+import { CourseState } from '../store/courses/course.state';
+import * as fromCourse from '../store/courses/course.reducer';
+import { UpdateCourse } from '../store/courses/course.actions';
 
 @Component({
   selector: 'app-edit-course',
@@ -44,7 +44,7 @@ export class EditCourseComponent implements OnInit, OnDestroy {
     return this.fb.group({
               id: course.id,
               title: [ course.title, [ Validators.required, Validators.maxLength(50), Validators.minLength(2) ]],
-              author: [ course.author, Validators.required ],
+              authors: [ course.authors, Validators.required ],
               creationDate: [ course.creationDate, Validators.required ],
               duration: [ course.duration, Validators.required ],
               description: [ course.description, [ Validators.required, Validators.maxLength(500)] ]
