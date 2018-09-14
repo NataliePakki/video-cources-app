@@ -15,7 +15,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
   course = this.fb.group({
     id: '',
     title: [ '', [ Validators.required, Validators.maxLength(50), Validators.minLength(2) ]],
-    authors: '',
+    authors: [[]],
     creationDate: '',
     duration: '',
     description: [ '', [ Validators.required, Validators.maxLength(500)] ]

@@ -25,7 +25,7 @@ export class AuthorsComponent implements ControlValueAccessor {
 
   onChange: Function;
   onTouched: Function;
-  authors: Author[];
+  authors: Author[] = [];
 
   constructor(private authorStore: Store<AuthorState>) {
     this.authors = [];
